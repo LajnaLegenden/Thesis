@@ -1,0 +1,798 @@
+\documentclass[a4paper,twoside]{bth}
+% BTH THESIS TEMPLATE
+%--------------------
+% Template version 4.1 -- November 16, 2023
+% Update also the Word template. Keep the version numbers in both formats in sync.
+%--------------------
+% Please change the data below appropriately to fit your thesis.
+% The data will be used to generate text in various places on the
+% thesis front and inner pages.
+%--------------------
+
+% DEGREE NAME. The degree name you are submitting your thesis for.
+% This must be one of the following:
+% Bachelor programmes:
+%    Bachelor of Science in Computer Science
+%    Bachelor of Science in Digital Game Development
+%    Bachelor of Science in Software Engineering
+% Master programmes:
+%    Master of Science in Computer Science
+%    Master of Science in Software Engineering
+%    Master of Science in Telecommunication Systems
+% Civilingenjör programmes:
+%    Master of Science in Engineering: AI and Machine Learning
+%    Master of Science in Engineering: Computer Security
+%    Master of Science in Engineering: Game and Software Engineering
+%    Master of Science in Engineering: Marine Engineering
+%    Master of Science in Engineering: Software Engineering
+%    Master of Science in Industrial Management and Engineering
+%    Master of Science in Mechanical Engineering
+\newcommand{\thesisDegree}{Bachelor of Science in Software Engineering}
+
+% DATE. The month year when your final report was submitted.
+\newcommand{\thesisMonth}{May}
+\newcommand{\thesisYear}{2024}
+
+% FACULTY.
+% Must be either Computing or Engineering.
+\newcommand{\faculty}{Engineering}
+
+% COURSE TIME. Course time in weeks.
+% For a 15 credits course this should be 10 and
+% for a 30 credits course, this should be 20 weeks.
+% Note that the week figure is the same whether you work alone or in a pair.
+\newcommand{\thesisWeeks}{20}
+
+% TITLE.
+\newcommand{\thesisTitle}{Highlights in Counter-strike 2}
+
+% SUBTITLE.
+% If you do not have a subtitle, please delete the line below.
+\newcommand{\thesisSubtitle}{Creating a new algorithm to find highlights}
+
+% AUTHORS.
+% Please replace with your first name(s) and last name(s). There can be several of each.
+\newcommand{\authorFirst}{Linus Jansson}
+\newcommand{\authorFirstMail}{lijs21@student.bth.se}
+% If there is no second author, please delete the texts in the last parentheses.
+\newcommand{\authorSecond}{Max Dahlgren}
+\newcommand{\authorSecondMail}{mafq21@student.bth.se}
+
+% SUPERVISOR.
+% Please replace with title, first and last names of your academic supervisor.
+\newcommand{\super}{Dr. Henry Edison}
+% Please replace with the name of the department of your academic supervisor, e.g.,
+% Computer Science, Mechanical Engineering, etc.
+\newcommand{\superAffiliation}{Computer Science}
+
+
+% PACKAGES AND COMMANDS START
+%----------------------------
+% please do not delete or change anything before the END of this section
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathenv}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{nameref}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{xtab}
+\usepackage{enumitem}
+\usepackage{glossaries}
+%\usepackage[sort&compress,numbers,square,comma]{natbib} % natbib interferes with the style; use \cite instead (see below)
+\usepackage{cite} % works only with numeric citations; comment out when using author-year styles
+\usepackage[color=blue!10,textsize=footnotesize,textwidth=25mm]{todonotes}
+\DeclareGraphicsExtensions{.pdf}
+
+\newtheorem{lem}{\textsc{Lemma}}[chapter]
+\newtheorem{thm}{\textsc{Theorem}}[chapter]
+\newtheorem{prop}{\textsc{Proposition}}[chapter]
+\newtheorem{post}{Postulate}[chapter]
+\newtheorem{corr}{\textsc{Corollary}}[chapter]
+\newtheorem{defs}{\textsc{Definition}}[chapter]
+\newtheorem{cons}{\textsc{Constraint}}[chapter]
+\newtheorem{ex}{\textbf{Example}}[chapter]
+\newtheorem{qu}{\textbf{Question}}[chapter]
+% -------------------------
+% PACKAGES AND COMMANDS END
+\makeglossaries
+
+\newglossaryentry{latex}
+{
+    name=latex,
+    description={Is a markup language specially suited 
+    for scientific documents}
+}
+
+% DOCUMENT BEGINS HERE
+\begin{document}
+
+\pagestyle{plain}
+\pagenumbering{roman}
+
+% THESIS FRONT PAGE (please do not change)
+% ----------------------------------------
+{\pagestyle{empty}
+\changepage{3cm}{1cm}{-0.5cm}{-0.5cm}{}{-1.5cm}{}{}{}
+\noindent
+\begin{tabular}{@{}p{0.75\textwidth} p{0.25\textwidth}}
+\thesisDegree & \hfill\multirow{3}{*}{\bthcsnotextlogo{3cm}} \\
+\thesisMonth \ \thesisYear & \\
+\end{tabular}
+
+%\begin{center}
+\center
+\vspace {7.5cm}
+{\Huge\textbf{\thesisTitle}}
+
+\vspace {0.5cm}
+{\Large\textbf{\thesisSubtitle}}
+
+\vspace{2cm}
+{\Large\textbf{\authorFirst}}
+
+\vspace{0.3cm}
+{\Large\textbf{\authorSecond}}
+
+\vspace*{\fill}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{1pt}} 
+Faculty of \faculty, Blekinge Institute of Technology, 371 79 Karlskrona, Sweden
+%\end{center}
+
+\clearpage
+} % Back to \pagestyle{plain}
+% ----------------------------------------
+
+
+% THESIS INNER PAGE (please do not change)
+% ----------------------------------------
+{\pagestyle{empty}
+\changepage{3cm}{1cm}{-0.5cm}{-0.5cm}{}{-1.5cm}{}{}{}
+
+{\small
+\noindent
+This thesis is submitted to the Faculty of \faculty\ at Blekinge Institute
+of Technology in partial fulfillment of the requirements for the degree of
+\thesisDegree. The thesis is equivalent to \thesisWeeks\ weeks of full-time studies.
+
+\vspace{1cm}
+
+\noindent
+The authors declare that they are the sole authors of this thesis and that they have
+not used any sources other than those listed in the bibliography and identified as references.
+They further declare that they have not submitted this thesis at any other institution to
+obtain a degree.
+}
+
+\vspace{10cm}
+
+\noindent
+\textbf{Contact Information:} \\
+Author(s): \\
+\authorFirst \\
+E-mail: \authorFirstMail \\
+\\
+\authorSecond \\
+E-mail: \authorSecondMail
+
+\vspace{2cm}
+
+\noindent
+University advisor: \\
+\super \\
+Department of \superAffiliation
+
+\vspace*{\fill}
+
+\noindent
+\begin{tabular}{@{}p{0.5\textwidth} l c l}
+Faculty of \faculty              & Internet & : & www.bth.se \\
+Blekinge Institute of Technology & Phone    & : & +46 455 38 50 00 \\
+SE--371 79 Karlskrona, Sweden    & Fax      & : & +46 455 38 50 57 \\
+\end{tabular}
+\clearpage
+} % Back to \pagestyle{plain}
+% ----------------------------------------
+
+\setcounter{page}{1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% YOUR TEXTS START HERE
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ABSTRACT IN ENGLISH
+% -------------------
+\abstract
+\textbf{Our text:}\\
+Highlights are often the things people remember from sport events, and are memorable even years after the event has taken place. In the world of e-sport, games such Counter Strike 2 the statement also stands true. We present a new algorithm for creating highlights that takes into account many different metrics to calculate the better moments of a game of Counter Strike 2.
+\\\\
+\textbf{Their text:}\\
+Most readers will turn first to the abstract of your thesis. Use it as an opportunity to spur the reader's interest. The abstract should highlight the main points of your work, especially the thesis' problem statement, methods, findings, and conclusions. However, the abstract does not need to cover every aspect of your work. The main objective is to give the reader a good idea of what the thesis is about.
+
+The abstract should be completed towards the end when you are able to overview your project as a whole. It is nevertheless a good idea to work on a draft continuously. Writing a good abstract can be difficult since it should only include the most important points of your work. But this is also why working on your abstract can be so useful -- it forces you to identify the key elements of your degree project.
+
+Structured abstracts have several advantages for authors and readers. They help readers to quickly find information in an abstract and also guide authors in summarizing the content of their manuscripts precisely. Below you find the main components of a structured abstract.
+
+\noindent
+\textbf{Background.} ... \newline
+\textbf{Objectives.} ... \newline
+\textbf{Methods.} ... \newline
+\textbf{Results.} ... \newline
+\textbf{Conclusions.} ...
+
+\vspace{1cm}
+% You can list up to 5 keywords, at most 2 appearing in the title;
+% starts 1 line below the abstract.
+\noindent
+\textbf{Keywords:} Up to 5 keywords, at most 2 of these should appear in the title. Starts 1 line below the abstract.
+
+\cleardoublepage
+% -------------------
+
+
+
+
+% ACKNOWLEDGEMENTS
+% -------------------
+\acknowledgments % Optional, comment out this part if not needed
+\noindent
+Here you can add your acknowledgements.
+
+\cleardoublepage
+% -------------------
+
+
+% TABLE OF CONTENTS PAGES (generated by LaTeX using the command(s) below)
+\setcounter{secnumdepth}{3} % only include sections down to level 3
+\tableofcontents
+% You should uncomment the commands you need.
+%\listoffigures             % in case you have them
+%\listoftables              % in case you have them
+%\listofalgorithms          % in case you have them
+
+\cleardoublepage
+\pagestyle{headings}
+\pagenumbering{arabic}
+\printglossaries
+\gls{latex}.
+
+\chapter{Preface}
+In the final thesis, you need to delete this chapter. Here, we specify some preliminaries that are valid for the whole thesis. Specific tips and guidelines are provided in the following chapters.
+
+\todo[inline]{Notes like this can be useful for your own comments.
+You can hide all of them at once by adding \texttt{disable} to the list of parameters to the command \texttt{\textbackslash usepackage[color=blue!10,textsize=footnotesize,textwidth=25mm]\{todonotes}\}.}
+
+
+\section{On supervisor feedback}
+When you prepare the thesis draft, consider that feedback from supervisors cannot be requested outside regular office hours, \emph{even though submission deadlines might be scheduled on a Sunday}. Hence, avoid requesting feedback with short notice, on a weekend or on Friday afternoon before the submission deadline. Supervisors should give feedback in a reasonable time frame. We recommend planning internal draft deadlines together with your supervisor. Adhering to the planned deadlines helps you to receive quality feedback, on time. 
+
+\section{On formatting}
+Please note that the chapter names and the chapter structure in this template are
+just suggestions. There is no ``one-size-fits-all'' structure for all types of theses.
+You need to use chapter, section, and subsection headers that are adapted to your
+particular topic. For example, you should add explicit subsections if they add clarity and make it easier to find certain content. 
+%Preferably, you should formulate your headers (and lists in general)
+%in so-called parallel (grammatical) form or structure.
+%If you do not remember what that means, now is the time to refresh your memory.
+
+Headers as well as regular paragraphs should start at the left margin of a page and be aligned left and right, as in the paragraphs shown here (i.e., unlike in most Word templates).
+There should be no white space between paragraphs. Instead, the first line of each paragraph should be indented, except for the first paragraph following a section-, subsection-, or sub-subsection header.
+
+Tables, graphs, and figures should be formatted consistently. It gives an unprofessional or even sloppy impression when their sizes, layouts, color schemes, etc. change in unpredictable ways. 
+
+Please make sure to get your citations and references correct and consistent.
+Just copying/pasting information from GoogleScholar or bibliographic databases is insufficient since the information is often incorrect and/or incomplete. In GoogleScholar, for example, many publications are falsely categorized and many conferences or workshops have odd names. In Scopus, the document URLs are local and therefore useless for lists of references.
+Please see the course literature (e.g., \cite{berndtsson2007thesis,evans2014write,glasman2021science,zobel2014writing}) for more information about the handling of citations and references.
+
+
+\section{On thesis structure and length}
+\label{sec:theis-structure}
+A thesis typically follows the structure already provided in this document. However, depending on the content and nature of a thesis, you may find it appropriate to deviate from that structure and, for example, report your results and your analysis in two separate chapters. In general, the contents of the results, analysis, and discussion are the following:
+\begin{itemize}
+    \item Results: objective results, i.e., the data you collected without analysis and interpretation
+    \item Analysis: an objective analysis of the results that is based solely on the collected data
+    \item Discussion: interpretation of and reasoning about the results and analysis within the context of the body of knowledge (external to your thesis)
+\end{itemize}
+
+It often makes sense to combine results and analysis into one chapter to avoid redundancy. However, there are scenarios where it makes sense to separate the presentation of the results from their analysis. For example, when you designed a study with two separate research methods and one research question requires you to analyse the results in combination. Then it may make sense to report all results in one chapter and the analysis answering the research questions in another. 
+
+Table~\ref{tab:pl} provides suggestions for a range of page lengths for each thesis chapter. Please note that these are rough estimates for your orientation. For a thesis at master level, the chapter lengths can be expected in the higher ranges, and for a thesis at bachelor level in the lower ranges. For a thesis at master level, the chapter lengths should normally not fall below the minimum length estimates, though.
+
+The complete thesis text, excluding preliminaries, references, and appendices, shall not exceed 80 pages for any thesis. 
+
+\begin{table}[htb]
+    \caption{Chapter length estimates}
+    \label{tab:pl}
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        Chapter & Min--Max pages  \\
+        \midrule
+        \nameref{chp:introduction} & 3--5 \\
+        \nameref{chp:relatedwork} & 3--7 \\
+        \nameref{chp:method} & 6--15 \\
+        \nameref{chp:results} & 7--20 \\
+        \nameref{chp:discussion} & 7--15 \\
+        \nameref{chp:conclusions} & 4--8 \\
+        \midrule
+        TOTAL & 30--70 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+In the remainder of this document, each chapter provides some guidance\footnote{Adapted from
+\begin{itemize}[nolistsep]
+    \item \url{https://sokogskriv.no/en/writing/structure-and-argumentation/structuring-a-thesis/}
+    \item \url{https://thesisguide.org/2014/10/13/thesis-architecture/}
+    \item \url{https://guidetogradschoolsurvival.wordpress.com/2011/04/08/how-to-write-related-work/}
+    \item \url{https://dissertationgenius.com/12-steps-write-effective-discussion-chapter/}
+\end{itemize}} on what is expected as content. Please refer to the evaluation rubrics in the thesis guidelines document \cite{guidelines_DP-BTH} to assess yourself regarding the degree to which your content fulfills the criteria.
+
+%------------------------------
+% THE ACTUAL THESIS STARTS HERE
+% The chapters below are just suggestions and need to be adapted to your topic.
+
+\chapter{Introduction}
+\label{chp:introduction}  % labels are used for cross references
+\section{On the content}
+Your introduction has two main purposes: 1) to give an overview of the main points of your thesis, and 2) to awaken the reader's interest. It is recommended to rewrite the introduction one last time when all writing is done, to ensure that it connects well with your conclusion.
+
+\emph{Tip}: For a nice, stylistic twist to create a connection between your introduction and your conclusion you can reuse a theme from the introduction in your conclusion. For example, you might present a particular scenario in one way in your introduction, and then return to it in your conclusion from a different -- richer or contrasting -- perspective.
+
+The introduction should include:
+\begin{itemize}
+    \item The background for your choice of theme
+    \item A problem statement that defines the scope of your thesis
+    \item A schematic outline of the remainder of your thesis 
+\end{itemize}
+
+
+\section{Background}
+\textbf{Our text:}\\
+In Counter Strike there are two teams, the Terrorists (T) and Counter-terrorists (CT). The game is focused on the T side planting a bomb at one of two sites, and the CT defending that site and defusing the bomb. This game is highly mechanical, meaning that its skill ceiling is very high. Each game in Counter Strike 2 is play with first to 13, with 12 round halves. There is overtime if the score is even after 24 rounds. Overtime consists of 3 rounds per side, with the first to win four rounds winning the game.
+\\\\
+All tournaments have different group stages, but most if not all use the single elimination bracket for the playoffs. Meaning there is a quarter, semi and final rounds, often best of 3 wins in the quarter and semi-finals and best of 5 in the finals.
+\\\\
+Millions of players tune in to watch professional matches, with the highest peak viewers up close to 3 million(2.75) people watching. This game was the PGL major in Stockholm, during the finals, when G2 faced NaVi, and the game was very close, going all the way to game 5.
+\\\\
+In the world of Counter Strike, there are a few moments that all players of the game are familiar with. These are often plays that work against all odds, with everything at stake. A few of these moments are when the players such as S1mple, during ESL One New York 2016, throws his AWP, the best gun in the game to confuse his opponent on dust\_2, or the one where Twistzz just pushing through the defense on the map Nuke during IEM Cologne 2022, or, probably the most iconic of all, Coldzeras B site hold on the map mirage, at MLG Columbus 2016. He single handily stopped Team Liquid from winning the game, with the score at 15-9 for Liquid. This, combined with the skill and luck involved, makes this probably the most recognized Counter Strike highlight of all time.\\\\
+Team liquid is approaching bomb site B with all of its members through what is called apartments. Coldzera is holding this part of the map scooped in with his AWP. The first player leading the push gets spotted by Coldzeras and gets eliminated. The four remaining members of Team liquid starts pushing toward Coldzera as he repositions to a new spot. Coldzera then does the most unthinkable play in his position and jump fires without scoping his AWP significantly decreasing the accuracy of the gun. He eliminates two opponents with this risky play and with only two opponents left he finishes off the fourth opponent with a quick no-scope and his teammate TACO eliminates the last standing member of team liquid. \\\\
+They go on to win that major, many thanks to this play. Highlights like this are what most people watch competitive e-sports for, and if you watch the highlight, you can hear how the crowd loves the play, and the casters are impressed.\\\\
+Most players playing Counter Strike, have these moments themselves, perhaps with less on the line, but the feeling of holding down a part of the map by yourself, is a great feeling. Some people compile all of their best moments into a highlight reel to upload for people to see. Our question is, can we find these highlights by analyzing the game, and find better highlights for a given round, in a given game. We are going to research if that is possible, how that could be done, and if getting highlights from your own matches, improves enjoyment of the game.\\\\
+A highlight is when something extraordinary occurs during a time period or an event. In the case of Counter-Strike 2 a highlight could be a multitude of things, for example a round when a player kills multiple players in one round or a player kills more than one player with one bullet or a single utility.\\\\
+A lot of things occur during a Counter-Strike 2 match, meaning it can be hard to decide what highlight is better than another. In a single game, multiple highlight worthy moments might happen, such as in one round a player might eliminate the whole enemy team, while in another round a player might kill three players with one grenade. It is here the algorithm comes in and values each play with different metrics and can decide which moments to make highlights of.\\\\
+
+\textbf{Their text:}\\
+The background sets the general tone for your thesis. It should make a good impression and convince the reader why the theme is important and why your approach is appropriate and relevant. Even so, it should be no longer than necessary.
+
+What is considered a relevant background depends on your field and its traditions. Background information might refer to previous research, the development of a technology, or practical considerations. You can also focus on a specific event or problem.
+
+Academic writing often means having a discussion with yourself (or some imagined opponent). To open your discussion, there are several options available. You may, for example:
+\begin{itemize}
+    \item Refer to a contemporary event
+    \item Outline a specific problem, a case study, or an example
+    \item Review the most relevant research/literature to demonstrate the need for this particular type of research 
+\end{itemize}
+
+In the background, you should also define the fundamental concepts and terminology your thesis builds on. Your thesis implements a new type of parser generator and uses the term non-terminal symbol a lot? Here is where you define what you mean by it. The key to this chapter is to keep it short. Whenever you can, don't reinvent a description for an established concept, but reference a textbook or scientific publication instead.
+    
+\emph{Tip}: Do not spend too much time on your background and opening remarks before you have started with the main text. But do not forget to rewrite your background before submitting your thesis to make sure it is consistent with the main text.
+
+\emph{Tip}: You have some words in your title that you have not picked up on yet? The background is a good place to do so.
+
+
+\section{Defining the scope of your thesis}
+\textbf{Our text:}\\
+This thesis will focus on the creation of our new algorithm and the empirical research we have conducted to create a better algorithm for finding highlights in the video game Counter Strike 2. 
+\\\\
+
+\textbf{Their text:}\\
+One of the first tasks of a researcher is defining the scope of a study, i.e., its area (theme, field) and the amount of information to be included. Narrowing the scope of your thesis can be time-consuming, but the more you limit the scope, the more interesting a thesis becomes and the easier it will be for you to decide what is relevant to include and what can be excluded. This is because a narrower scope lets you clarify the problem and study it in greater depth, whereas very broad research questions only allow a superficial treatment.
+
+Sometimes you can also clarify the scope by providing an overall general goal, a research question, a research gap, or a hypothesis identified by recent research. More specific research questions, gaps, and/or hypotheses should be motivated and formulated in the \nameref{chp:relatedwork} and in the \nameref{chp:method} chapters respectively.
+
+
+\section{Outline}
+
+\textbf{Their text:}\\
+The outline gives an overview of the main points of your thesis. It clarifies the structure of your thesis and helps you find the correct focus for your work. The outline can also be used in supervision sessions, especially in the beginning. You might find that you need to restructure your thesis. Working on your outline can then be a good way of making sense of the necessary changes. A good outline shows how the different parts relate to each other, and is a useful guide for the reader.
+
+
+\chapter{Related Work}
+\label{chp:relatedwork}
+\section{On the content}
+\textbf{our text:}\\
+In the article \cite{Tgwri1s2017} by Tgwrils (2017) we can further research into how the new rating system works and this gives us a better insight of how we can rate our metrics for the algorithm. The rating system is explained in the article as rating performance and not rating individual highlight moments. It focuses more on the overall performance of a player over a match. 
+\\\\
+In the paper \cite{Rubin2022} by Rubin, A. (2022, January 13). There are a lot of useful metrics and data we can use, such as what is the most significant factor for a team to win a round, Rubin presents data that show that the team's equipment value is one of the leading causes for a chance to win. This information we can take into account when creating our new algorithm. We can for example interpret this as if a player with poorer equipment value eliminates the enemy team, it is higher valued in the algorithm than if the player had more valuable equipment.\\\\ 
+It is also stated how they analyze data from games and parse the demos they collected, which is of great use to us as we also need to collect similar data.\\\\
+In the article "On broadcasted game video analysis: event detection, highlight detection, and highlight forecast" by Chu, W.-T. and Chou, Y.-C. (2016) they go over the topic of highlight detection which is appropriate for us. They go over metrics such as motion intensity, frame dynamics, number of gamers, event ratio, number of viewers chat and number of emotion symbols. All of these metrics might not be possible to collect as we are not analyzing a live event where there are any active viewers or interaction with any chat or crowd. As the article does however cover the topic of arousal of viewers, it is worth studying as the purpose of a highlight is to create excitement.\\\\
+In the paper  "Automatic soccer video analysis and summarization," by m A. Ekin, A. M. Tekalp and R. Mehrotra (2003). We get to read on how a very different sport handles video analysis and summarization of games. The text is interested in the sense how other sports/activities can be analyzed and what to can be looked at, for example in the article there is mentioning of slow-motion segments which could also be used in highlights to show the event in more detail.
+\\\\
+In the master thesis "CS:GO Player Skill Prediction" \cite{BaranNama} we get to read about 
+\\\\
+The articles mentioned covers different aspects of analyzing games via metrics, this relates to our work as to find highlights we need to analyze the game similarly. 
+
+
+\textbf{Their text:}\\
+This chapter describes existing works that are related to your work. Related, in this sense, means that it deals with the same or a similar problem or that it uses the same or a similar approach to solve a different problem. Typically, each piece of related work (often a research paper) is summarized briefly together with an \emph{explanation of its relation to your work}. This last part is absolutely crucial: the reader should not have to figure out the relation him- or herself. You need to explain in which way(s) the related work is similar to or different from your work. Is your work better from some perspective? More generalisable? More performant? Simpler? It is OK if it is not, but you should tell the reader.
+
+A few suggestions to make writing your related work section easier:
+\begin{itemize}
+    \item Every time you read a paper, write a short summary of the paper and highlight important sections. This way you can read your own recap of the paper to decide if it is applicable instead of relying on the abstract.
+    \item Use the reference section of the papers you read to search for other papers to read. If a paper is closely related to your topic, then the papers they reference are likely papers that are also closely related to your topic and you should read them.
+    \item When writing a paragraph on a paper, make sure you can answer the question ``how does this relate to my work?'' If you can't, consider not including it. 
+    \item Think about the ``bigger picture'' of the works you present/summarize. In which ways are they similar or different? 
+\end{itemize}
+    
+\emph{Tip}: End the chapter with a summary that makes clear how your work fits into the works presented and which research gaps it fills. A table that compares the related works along the characteristics that you feel are most important in relation to your work might be a good summary.
+    
+\emph{Tip}: Make sure to answer the \emph{``So what?''-question}, i.e., what does all this mean for your work and why did you bother writing about it?
+
+
+\chapter{Method (HOW)}
+\label{chp:method}
+\section{On the content}
+Here you specify and motivate your research questions or hypotheses and relate them to your overall goal, research question, or hypothesis, if you have defined one in the introduction. Furthermore, you describe the method or research design for answering your research questions or testing your hypotheses and discuss the reliability and validity of your approach. The latter is important for a reader to assess the trustworthiness and generalizability of your results.  
+
+
+\section{Defining research questions}
+\textbf{Our text:}\\
+\section{Preliminary goals:}
+\normalsize
+\begin{enumerate}[label=PG\arabic*., leftmargin=*]
+    \item Create a proof of concept of a highlight algorithm, that finds "better" highlights for a given player in a match
+    \item Find out what is required for an alternative highlight algorithm, what metrics players prefer
+    \item Find what makes a highlight "better" and increases enjoyment when watching a highlight.
+\end{enumerate}
+
+\section{Preliminary research questions:}
+\normalsize
+\begin{enumerate}[label=RQ\arabic*., leftmargin=*]
+    \item How can one create an algorithm to find better highlights in Counter Strike 2? \\\\
+    The value of creating the proof of concept is a better highlighting algorithm than existing ones, thus making for better clips for players and spectators of the game. 
+    \item What metrics are most important when developing an algorithm to find highlights in Counter-Strike 2? \\\\
+    Finding out what is required for a highlight and what players prefer can help in further research into the subject and can even connect to other games where similar highlights can be of interest.
+    \item How do the perceptions of what makes a good highlight differ between novice and experienced players?\\\\
+    Finding out the difference between perception of highlights of a seasoned player or someone who has not as much or no experience gives us a insight how you can direct highlights so that they can be enjoyed by different demographics. 
+    
+\end{enumerate}
+Research question number 1 is connected to goal 1. Question 2 is connected to goal 2. Question 3 is connected to goal 3.\\\\
+The value of these goals can affect and be used by players of the Counter Strike 2, others that are interested in the topic of highlight making/analyzing, and for spectators of the game.\\\\
+
+\textbf{Their text:}\\
+An important property of a research question is that it can be answered. If not, you have probably come up with a theme or a field, not a question. You can find many guidelines online (e.g., this one\footnote{\url{http://www.robertfeldt.net/advice/guide_to_creating_research_questions.pdf}}) on how to formulate good research questions.
+
+Some tips:
+\begin{itemize}
+    \item Use interrogative words: how, why, which (factors/situations), in which ways, etc.
+    \item Some questions are closed and only invoke concrete/limited answers. Others will open up for discussions and different interpretations.
+    Asking ``What?'' is a more closed question than asking ``How?'' or ``In what way?'' Asking ``Why'' means you are investigating the causes of a phenomenon. Studying causality is methodologically demanding.
+    \item Feel free to pose partially open questions that allow discussions of the overall theme, e.g., ``In what way\dots''; ``How can we understand [a particular phenomenon]?''
+    \item Do not use research questions that are answered by just ``yes'' or ``no'', except when you have a specific hypothesis that you are going to test.
+    \item Avoid questions stating that you want ``to know'' something. It is very unlikely that you get to know something definitely after your degree project.
+\end{itemize}
+
+
+\section{Describing your research method}
+\textbf{our text:}\\
+We use a proof of concept and mixed-methods approach with surveys and interviews in this study. The interviews are conducted to get a better insight into what and how to measure different metrics that will be used in the algorithm. The surveys serve the purpose of comparing our algorithm with existing highlight tools. This way we can see if our algorithm could be considered better at finding highlights.
+\subsection{Proof of concept of an algorithm}
+
+\subsubsection{Initial plan}
+The initial plan was to have a system in which the demofile is analyzed and all the results of the different metrics are multiplied by a weight and then added to a final score. Some of the metrics are ones that you want to be lower, like the time between each kill, and if you die. The formula would look something like this.
+
+$$\text{Total Score} = \sum_{i=0}^{x} weight_i \times metric_i $$
+
+where x is the number of metrics
+\subsubsection{Final Product}
+
+Exponential metric
+$$
+
+$$
+Linear metric
+$$
+
+$$
+
+getWEapon score
+
+$$
+
+$$
+
+getHPLeft
+
+$$f(x) = 100 \cdot e^{-ax}  \qquad \text{where } a = 0.03$$
+
+This formula is an exponential decay function. It models the decrease in HP Left Value as the input value (x) increases. The growth rate (a) controls how quickly the value decays. A higher growth rate means a faster decay. \todo{CHATGPT WRITTEN}
+
+We choose 0.03 as the $$a$$ value since this makes the points for that metric go up around the 35 HP mark, that being one shot away from death from most strong weapons.
+
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = $HP$,
+    ylabel = {$f(x)$},
+]
+\addplot [
+    domain=0:100, 
+    samples=100, 
+    color=blue,
+] {100 * exp(-0.03*x)};
+\addplot[
+    only marks,
+    mark=*,
+    nodes near coords,
+    point meta=explicit symbolic,
+]
+coordinates {
+    (35, 100 * exp(-0.03*35)) [One Shot]
+};
+\end{axis}
+\end{tikzpicture}
+    \caption{HP left scaling}
+    \label{fig:hp-left}
+\end{figure}
+
+\subsubsection{Lessons Learned}
+
+\subsubsection{Technologies used}
+Our algorithm was built using Typescript as the language of choice. This choice was made both out of familiarity and based on Typescripts fast iteration speed, enabling us to make changes faster than a language like C++ or Rust.
+
+Counter-strike 2 records everything that happens in a match in a \Gls{demo} (demo) file. To parse this information, we used a library that would give us events from the match, such as whenever a player dies, shoots, or when the rounds start or end. This library does not give us the data we need directly, so for that we need to parse information from the events available. So for that we need to analyze the data from the demo, to later pass to our algorithm to calculate with \todo{EXPLAIN MORE????}
+
+The first part of the process to generate a highlight is to extract the metrics from the demo file. This is done in a file called DemoAnalyzer.ts, and this fine handles reading the demo file and transforming the data into a usable format. It does this by looking at different events \todo{list events??} and calculate the metrics. \todo{explain how some of them work?}.
+
+The next part is to store the metrics in the database. This is handled by a separate file `SaveDemoInfo.ts`. This file reads the data, and puts it into tables in the database. The reason for making this a separate step was for readability and code quality. This splits up the code into the analyzer, that is only responsible for reading the data, and storing it in memory, and the SaveDemoInfo part, that only focuses on storing the data. 
+
+The last part is the most important step. This is the algorithm itself. This takes in all the data from the demo file, as well as the weights we have defined from the \nameref{sec:survey}. This then calculates a score from each metric between 0 and 100. This was done to make sure that each metric is valued the same before the weighing process. This is done using this mapping function from p5.js\cite{p5jsMap}\todo{check ref with henry}
+
+After the mapping function has given its value between 0 and 100, this then is weighted, so that we can control how important the metrics are for a highlight. For example, should one kill through a wall be considered better or worse than one kill that is very far away? That is the proposal of a weight. \todo{better example?}
+
+\subsection{Survey}
+\label{sec:survey}
+A survey will be created with our algorithm's outputted round and the Allstar{glossarie} tool's "play of the game" round, where the same matches are evaluated on the same player, and the participant can choose which they prefer. Both rounds will be re-recorded so that a fair comparison can be made without editing and each clip starts a few seconds before and action such as shooting, spotting an enemy or throwing utility is done. \\\\
+\textbf {Content for the survey:}
+\begin{itemize}
+    \item Two clips are shown, A and B. One is the round our algorithm picked and one is the round Allstar picked, the respondent will not be told which clip is which so that there will be no biases. The respondent is then faced with the question of which clip they preferred or if the clips are indifferent. They then have the choice to write a more detailed explanation why they picked as they did or any other input they had.
+    
+    We will show the participant two highlight clips that were created from the same game, one by our algorithm and the other by an existing highlight creator tool. Which highlight was created by who will be kept hidden. The participant will then be prompted to pick which they liked the most or an "indifferent" option. The participant will go through 5 to 10 of these highlight selections. 
+    \item After each round of selection, the participant will be prompted to explain why they choose the highlight and if they enjoyed the clips that they were presented.  
+\end{itemize}
+The survey will connect with preliminary goal 1 to see if our the highlight our algorithm creates are preferred over what existing tools create. It will also answer research question 3 by seeing if algorithm based highlight clips can create joy for the viewer.\\\\
+The choice to conduct surveys was made because we want to have a large pool of opinions, as we want to see if our new algorithm is "better" than existing ones. By choosing to do surveys, we can reach a greater amount of people. To create the surveys, we would use either sites like Surveymonkey.com or Google Forms. The surveys would be put in different forums on sites like Reddit.com, Discord channels and HLTV.org. The main targeted respondents would be those who have played Counter Strike 2, as these are the more likely to have an opinion about the clips they are shown. As we have no control of the surveys and who receives them, we would likely need to put questions such as "Have you played the game Counter Strike 2?" to see the difference in opinions between people who have played the game and not.\\\\
+When analyzing the results, we would need to do a statistical analysis of the quantitative data, which would be the preferred clip. We could then gather statics such as the median for which clips the users decide to pick. Creating pie charts would also be a good way to visualize how the participants picked. For the qualitative data, which would be the free text part where the participant explained why they picked what, we will have to look for patterns and trends between what they picked and categorize based on if they played the game before.
+
+\subsection{Interviews}
+Interviews will be conducted before developing the algorithm to find what metrics players weigh higher, to give a better baseline on what the weights should be. \\ \\
+\textbf {Questions for the pre interview:}\\
+\section{Questions:}
+\normalsize
+\begin{itemize}
+    \item What is the most memorable highlight in Counter Strike history according to you? 
+    \begin{itemize}
+        \item What makes it memorable?
+    \end{itemize}
+    \item What is your experience with highlights in FPS games?
+    \item What makes a good highlight?
+    \item What metrics are important for a highlight?
+    \item Rate these metrics from 1 to 10:
+        \begin{itemize}
+        \item Amount of kills 
+        \item if the player died
+        \item Weapon used 
+        \item Time between each kill
+        \item Bullets fired
+        \item Team side
+        \item Player position (Distance)
+        \item Airborne 
+        \item Headshot
+        \item Damage given
+        \item HP of the player
+        \item No scope with scoped weapons
+        \item Wall banging
+    \end{itemize}
+    \item Do you use any highlight tool?
+    \begin{itemize}
+        \item What highlight tool?
+        \item What do you do with the highlights?
+    \end{itemize}
+
+    
+\end{itemize}
+
+Question one to three in the pre interview will help us achieve the three preliminary goals and answer the research questions, as these will give us further insight into what metrics are needed and how to value them. It will also help us get a better insight to what makes a good highlight. \\\\
+The choice of doing interviews was so that we could get a better understanding on how to rate different metrics and what players think is a good highlight so that we could improve our algorithm. The interview would be conducted either in person or online, where it would be recorded or transcribed. The targeted respondents would be people who analyze the game, such as casters, commentators or professionals players of the game. We would also interview more casual players of the game. To recruit these respondents, we would have to email or contact them through other forms and ask if they are interested in participating in our interview. After the interviews are conducted, we gather all the data we have collected and analyze it. Things to look for would be patterns and themes that are recurring in the answers.\\\\
+The answers we gathered here lays a base on how we weigh our metrics but could be used in other games that are similar to Counter Strike 2.\\\\ 
+\textbf{Their text:}\\
+The method chapter should not iterate the contents of methodology handbooks. You also do not need to describe the differences between quantitative and qualitative methods or list all different kinds of validity and reliability. Such general descriptions are only meaningful when you need them to motivate the approach you have taken.
+
+What you \emph{must} do is show how your choice of design and research method is suited to answering your research question(s). A good approach to motivate your choice is to compare the properties, characteristics, and features of different research methods, illustrating why a particular method is (not) well suited to answer a particular research question. You should try to identify reasonable (but not all) research methods, that have at least the potential to be considered as alternatives.
+
+
+\section{Validity and reliability of your approach}
+\textbf{Our text:}\\
+Our approaches of collecting data through interviews was done via discord where we recorded the interview. This was done so that we could have a greater reach of who we interviewed. This made it possible to get a bigger size pool of different people. We also had to take into account that the people we wanted to interview had played Counter Strike or similar games.\\\\ We recognized that it would be hard to fairly value metrics, as there a many, but the approach we took made it so that if there are metrics not mentioned by us in the interview the interviewee could have the possibility to add metrics.   \\\\\
+Our approaches of collecting data through surveys was done via *INSERT SOURCE* to actually compare with existing highlight tools such as ALLSTAR. The participants would not know which clip came from ALLSTAR or our algorithm, making it non-biased. As the clips are also generated from the same game, there would not be any bias from us that developed the algorithm. 
+\\\\
+\textbf{Their text:}\\
+In addition to describing and justifying your method, you should demonstrate that you have given due consideration to the validity and reliability of your chosen method. By ``showing'' instead of ``telling'', you demonstrate that you have understood the practical meaning of these concepts. This way, the method section is not only able to tie the different parts of your thesis together, but it also becomes interesting to read!
+
+
+\begin{itemize}
+    \item Show the reader what you have done in your study, and explain why. How did you collect the data? Which options became available through your chosen approach (and which did not)?
+    \item What were your working conditions? What considerations did you have to balance?
+    \item Tell the reader \emph{what you did to increase the validity} of
+    your research. E.g., what can you say about the reliability of data
+    collection? How do you know that you have actually investigated what you 
+    intended to investigate? What conclusions can be drawn on this basis? 
+    Which conclusions are certain and which are more tentative? Can your 
+    results be applied in other areas? Can you generalise? If so, why? If 
+    not, why not?
+    \item You should aim to describe weaknesses as well as strengths. An excellent thesis distinguishes itself by defending -- and at the same time criticising -- the choices made. Being self-critical increases trustworthiness.
+\end{itemize}
+
+
+\chapter{Results and Analysis WHAT}
+\label{chp:results}
+\section{On the content}
+\textbf{Our text:}\\
+\section{Results from interviews}
+
+The interviews were focusing on the metrics and what people liked about highlights. The interviews lay a baseline on what metrics should be included and metrics we already have included should be valued. The individuals we interviewed had different experience with highlights, Counter Strike 2 and other FPS games. Out of the 8 interviews we conducted, all had at least played one game of Counter Strike and knew of the game. Some with more experience than others. Many of the interviewees have a couple of thousand hours in the Counter Strike scene and are or have been invested in the game for years, while others have just a couple of games under their belt.\\\\
+\subsection{First question}
+The first question we asked the interviewees was, "What is your experience with Counter Strike or other FPS games?". From this question, we can have a broader aspect of what people with different experience think of such a topic as highlights in a game such as Counter Strike. The result we got from the question was that 6 out of 8 had a lot of experience in the game Counter Strike. While one interviewee had minimal experience with the game and another did not have much experience in Counter Strike but in other FPS games. One interviewee said, "I've been playing CS since I was a kid, more or less, 1.6. And then Source and all that. And then I started playing CS a lot in 2014. And have been playing CS since then every week. Since 2014 approximately. With some breaks here and there. But relatively regularly every year I played CS."\\\\
+\subsection{Second question}
+The second question we asked was "What is your experience with highlights in FPS games?". The result we got from this question was that most of the interviewees knew what they were, or with reference to other activities could understand the concept of a highlight. Many of the interviewees that had a lot of hours in Counter Strike had used programs such as Medal or similar to record the last 30 seconds or more to later edit or just save the clips. Others also answered with automatic clipping tools from sites such as Leetify and Esportal. Two out of the eight interviewees had no experience with highlights in FPS games.\\\\
+\subsection{Third question}
+The third question we asked, "What do you think is the most memorable highlight in Counter Strike history?". Here again the interviewees with a lot of hours in Counter Strike could reference highlights from the e-sport scene. Highlights that were mentioned was "happy 1Deag ace on Banana" \textbf{BENJAMIN REFRENCE} which happened during the game between the e-sport teams "EnVyUs vs TSM" where the player Happy eliminates the whole enemy team with the weapon Desert Eagle during DreamHack Open London 2015. Another interviewee mentions "After all, I have both famous ones from big tournaments or matches like Coldzera when he jumps and shoots on Mirage."\textbf{LIMPAN REFRENCE} which refences to a match between "Luminosity vs Liquid" during MLG Columbus 2016. The last refrence we get to e-sport matches is with an interviwee that says, "What I think is the best? Off the cuff, what pops into my head is Hiko. When he was clutching Dust 2 or something like that." Which references to the clip of the pro player Hiko getting a 180 degree flickshot on an enemy hiding behind a door on the map Dust2 during EMS One Katowice 2014 major.\\\\
+The other interviewees answered with more general answers such as highlights that they had experience on their own, such as when they eliminated four players in a single round or when they eliminated the whole enemy team.\\\\
+The follow-up question to the previous question is "What makes the highlight memorable?". Here we get interviewees referencing to casters of e-sports games "For me, that's what makes a good highlight. Precisely the part that lifts it is the skill demonstration. But also when the commentator is so damn hyped. That combination to me is absolutely fantastic. You get a lot of everything. If it's not from the clip, it's from the commentator. This for me means a lot. If it is no commentator. Which it is not when you play yourself. Then music can be the supporting part. That you have music that is timed with the shot or similar." \textbf{AIIMAR REFRENCE} another answered "The casters. Caster. Yeah. I suppose also the importance of the round". Others mentions the technical skills of the player, they won an impossible round or one answered "It must be something cool that happened. The more kills, the better. The faster the kills, the closer the kills are to each other, the better. The more shady the weapon, if you do something cool with it, the better." \textbf{WOTTOWMAN02 REFERENCE}\\\\
+\subsection{Fourth question}
+The fourth questions we asked was "What makes a good highlight?". From these questions we got a lot of different answers. One interviewee answered with "Quick succession. Quick responses. Like going from one to the other in rapid succession. And quantity of kills, usually." \textbf{BENJAMIN REFRENCE} while another answered with "I have a hard time pointing to a thing. But if I have to point to one thing, it's one taps. I think that is absolutely fantastic. I think that is always worth including in a highlight. Deagle OneTaps. It could be AKs. If you do it several times in the same round, or you have 5 kills via OneTaps." \textbf{AIIMAR REFERENCE}. These answers focus on the technical skill aspects of the highlights, while one interviewee said "A good highlight is made when there are a lot of people watching at the same time, when a good commentator at a professional match does a lot. And the circumstances, such as the thing that he is in Sweden and does such a thing against a non-Swedish team, means that everyone gets extra hyped."\textbf{zpam REFERENCE} about the pro-scene and on individual level said "Then it is probably important that you want to play with friends. So that they actually see you. And the best thing is if it's one against five or similar so that everyone can see you when you play." \textbf{zpam REFRENCE} focusing more on the social aspect of highlights and that it is something that gets the crowd or friends going. So from this we can gather that depending on the context of the game context and what scene players are playing in, there is a difference on what is considered highlight worthy.\\\\
+\subsection{Fifth question}
+Question five was about valuing metrics we provided to the interviewees from 1 to 10.
+        \begin{itemize}
+        \item Amount of kills: average = 8
+        \item if the player died: average = 6,142857143
+        \item Weapon used average: = 7,071428571
+        \item Time between each kill: average = 7,142857143
+        \item Bullets fired average: = 7,357142857
+        \item Team side: average = 2,428571429
+        \item Player position (Distance): average = 6,285714286
+        \item Airborne average: = 8,285714286
+        \item Headshot average: = 7,785714286
+        \item Damage given average: = 5,928571429
+        \item HP of the player average: = 6,714285714
+        \item No scope with scoped weapons average: = 7,071428571
+        \item Shooting through objects average: = 8,142857143
+    \end{itemize}
+Interesting takes from the average is that the team side has very low impact on a highlight.\\\\
+\subsection{Sixth question}
+Question six was, "is there any metric that we have forgotten?". On this question, one interviewee answered, "Something you didn't mention was this movement thing." which we did not include in the metrics but could be worth thinking about when developing the algorithm. One problem with accounting for movement is that it is hard to do, and what should be considered when looking at movement. Such, if a player moves fast between kills or if a player b-hops cross the map and eliminates an enemy. Another interviewee said, "The hit ratios are important to me. And maybe crosshair placement." Shots fired could be swapped out to hit ratio because as there could be situation where more bullets are necessary such as shooting through walls or where there is damage fall-off based on distance. Crosshair placement is also hard to weigh because of the implementation technicality, but it could be implemented. One interviewee said, "After all, it is to create a metric to start running highlights when enemies are close to each other. Type in smokes or distance wise. Because if you are very close to each other on a site or something, highlights are rarely created there. That they passed each other, were close to each other or that they did not see each other. Something along those lines.". To measure times when allies and enemies are in proximity to each other in a smoke or similar will also be hard to implement because of the technicality of the metric, but it could also be done. \\\\
+\subsection{Seventh question}
+Question seven "Do you use any tool to create highlights?" most interviewees answered that they had either used tools such as Medal, Faceit's highlight clipper, Esportal's highlight clipper. One interviewee answered, "I don't use anything. If I were to do it, I would use something that was simple and fast. Which fixed nice highlights. Which I could save and display. So, share those that might be able to be sent on discord directly. Or similar. like GIFS". So simplicity and portability would be important.\\\\
+\subsection{Eight question}
+The follow-up to the question above was "What do you do with the highlights?". Where some interviewees answered that they put them on YouTube in compilations with other clips, and some share them with friends. So highlights is mostly used to recap good moments and to be able to share them with friends and others.
+\\\\
+\subsection{Conclusion from interviews}
+Based on the answers we got from the questions, we now have a baseline of what we should value the different metrics. We also got new thoughts on what people look for in highlights and got examples of highlights that the interviewees liked. During the interviews we also noticed a stark difference in the specificity of answers with the people who had more experience with Counter Strike than those without. 
+\textbf{Their text:}\\
+Your results and analysis, along with your discussion, will form the highlight of your thesis. This is where you report your findings and present them in a systematic manner. The expectations of the reader have been built up through the other chapters, make sure you fulfill these expectations.
+
+As already described in Section~\ref{sec:theis-structure}, you should keep the results (the data you collected), the data analysis, and the interpretation/discussion of the results and the analysis separate, if possible. In many practical cases, it makes sense to describe the data and their analysis together.
+%To analyse means to distinguish between different types of phenomena -- similar from different. Importantly, by distinguishing between different phenomena, your theory is put to work.
+Precisely how your analysis should appear, however, is a methodological question. Finding out how best to organise and present your findings may take some time. A good place to look for examples and inspiration is journal publications or repositories for theses (e.g., DiVA). Regarding the latter, please keep in mind that repositories for theses contain all passed theses -- even the ones that received low grades. 
+
+In the results, you typically provide descriptive statistics about your datasets and their properties, like populations, samples, and distributions.
+Data visualizations, like histograms, can be very useful to present the results. In the analysis, you often use inferential statistics (among other things) to make inferences from the results (like generalizations and predictions).
+
+
+\chapter{Discussion GIVE TAUGHT}
+\label{chp:discussion}
+\section{On the content}
+In many theses, the discussion is the most important section. Make sure that you allocate enough time and space for a good discussion. This is your opportunity to show that you have understood the significance of your findings and that you are capable of applying theory in an independent manner.
+
+The discussion will consist of argumentation. In other words, you investigate a phenomenon from several different perspectives. To discuss means to consider different interpretations of your findings. Here are a few examples of formulations that signal argumentation:
+
+\begin{itemize}
+    \item On the one hand \dots and on the other \dots 
+    \item However \dots
+    \item \dots it could also be argued that \dots
+    \item Another possible explanation may be \dots
+\end{itemize}
+
+
+\section{Things to keep in mind when writing your discussion}
+\begin{enumerate}
+    \item Try to structure your discussions from the ``specific'' to the ``general'': expand and transition from the narrow confines of your study (based on your results and analyses) to the general framework of your discipline.
+    \item Make a consistent effort to stick with the same general tone of the introduction. This means using the same key terms, the same tense, and the same point of view as used in your introduction.
+    \item Start by re-stating your research questions and/or hypotheses. Then declare the answers to them -- make sure to support these answers with a clear line of evidence that can be traced to your analysis and/or your data.
+    \item Continue by explaining how your results relate to the expectations of your study and to the literature. Clearly explain why the results are trustworthy (or not if there are doubts about the reliability or validity of the data collection and/or analysis) and how they relate (supporting or contradicting) with previously published knowledge about the subject. If your thesis closes a research gap you or someone else has identified and described, state that explicitly. Make sure to use relevant citations.
+    \item Make sure to give the proper attention to all the results relating to your research questions, this is regardless of whether or not the findings were statistically significant.
+    \item Don't forget to tell your audience about the patterns, principles, and key relationships shown by each of your major findings and then put them into perspective. The sequencing of this information is important: 1) state the answer, 2) show the relevant results and 3) cite the work of credible sources. When necessary, point the audience to figures and/or graphs to ``enhance'' your argument.
+    \item Make sure to justify your answers. Try to do so in two ways: by explaining the validity of your answer and by showing the potential shortcomings of others' answers. You will make your point of view more convincing if you provide both sides to the argument.
+    \item Also make sure to identify conflicting data in your work. Make a good point of discussing and evaluating any conflicting explanations of your results. This is an effective way to win over your audience and make them sympathetic to any true knowledge your study might have to offer.
+    \item Make sure to include a discussion of any unexpected findings. When doing this, begin with a paragraph about the finding and then describe it. Also, identify potential limitations and weaknesses inherent in your study. Then comment on the importance of these limitations to the interpretation of your findings and how they may impact their validity. Do not use an apologetic tone in this section. Every study has limitations. Showing your awareness regarding the limitations increases the trustworthiness of your reasoning.
+    \item Conduct a brief summary of the principal implications of your findings for research and practice in the area (do this regardless of any statistical significance). You might also want to provide recommendations for potential research in the future related to your implications. A brief summary of these recommendations will typically be included in Chapter~\ref{chp:conclusions} (\emph{\nameref{chp:conclusions})}.
+    \item You should also think about the potential wider consequences of your results. Do they have an impact on society? What are the possible ethical consequences of your findings? Does your work have an impact on sustainability (in whatever dimension)?
+%    \item Show how the results of your study and their conclusions are significant and how they impact our understanding of the problem(s) that your thesis examines. This will make the contribution of your thesis more explicit.
+    \item On a final note, discuss everything that is relevant \emph{but be brief, specific, and to the point}.
+\end{enumerate}
+
+
+\chapter{Conclusions and Future Work}
+\label{chp:conclusions}
+\section{On the content}
+The final section of your thesis may take one of several different forms. Some theses need a conclusion, while for others a summing up will be appropriate. The decisive factor will be the nature of your thesis statement and/or research question.
+
+A conclusion should answer your research question(s). Remember that a negative conclusion is also valid. Open research questions cannot always be answered. You should, however, at least discuss why you cannot answer them.
+
+A summing up should repeat the most important issues raised in your thesis (particularly in the discussion), although preferably stated in a (slightly) different way. For example, you could frame the issues within a wider context.
+
+Whichever form your final section takes, it should clearly describe the \emph{contribution} your thesis makes to the body of knowledge in your area, i.e., how your results impact the understanding of and knowledge about the problem(s) that your thesis examines.
+
+
+\section{Placing your thesis in perspective}
+In the final section, you should place your work in a wider, academic perspective and determine any unresolved questions. During the work, you may have encountered new research questions and interesting literature that could have been followed up. At this point, you may point out these possible developments, while making it clear to the reader that they were beyond the scope of your current project.
+
+\begin{itemize}
+    \item Briefly discuss your results from a different perspective. This will allow you to see aspects that were not apparent to you at the project preparation stage.
+    \item Highlight alternative research questions that you have found in the source materials used in the project.
+    \item Show how others have placed the subject area in a wider context.
+    \item If others have drawn different conclusions from yours, this will provide you with ideas of new ways to view the research question.
+    \item Describe any unanswered aspects of your project.
+    \item Briefly discuss potential future work. 
+\end{itemize}
+ 
+    
+\section{A thesis should ``bite itself in the tail''}
+There should be a strong connection between your conclusion and your introduction. All themes and issues that you raised in your introduction (overall general goal, research questions or gaps, hypotheses) must be referred to again in one way or another. If you find out at this stage that your thesis has not tackled an issue that you raised in the introduction, you should go back to the introduction and delete the reference to that issue. An elegant way to structure the text is to use the same textual figure or case in the beginning as well as in the end. When the figure returns in the final section, it will have taken on a new and richer meaning through the insights you have encountered, and created in the process of writing.
+
+% All references are in a separate file: thesis-refs.bib
+\bibliography{thesis-refs}
+\bibliographystyle{IEEEtranS}
+
+
+\appendix
+\chapter{Supplemental Information}
+
+
+% DO NOT CHANGE BELOW
+% This part makes sure that the last page is even with BTH-logo.
+% -------------------
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{\fill}
+\clearpage{\thispagestyle{empty}}
+\changepage{3cm}{1cm}{-0.5cm}{-0.5cm}{}{-1.5cm}{}{}{}
+\vspace*{\fill}
+\center
+
+{\bthcsnotextlogo{3cm}}
+\\
+\noindent\makebox[\linewidth]{\rule{\textwidth}{1pt}} 
+Faculty of \faculty, Blekinge Institute of Technology, 371 79 Karlskrona, Sweden
+% -------------------
+
+\end{document}
