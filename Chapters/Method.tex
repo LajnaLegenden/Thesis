@@ -1,21 +1,7 @@
 
-\chapter{Method (HOW)}
+\chapter{Method}
 \label{chp:method}
-\section{On the content}
-Here you specify and motivate your research questions or hypotheses and relate them to your overall goal, research question, or hypothesis, if you have defined one in the introduction. Furthermore, you describe the method or research design for answering your research questions or testing your hypotheses and discuss the reliability and validity of your approach. The latter is important for a reader to assess the trustworthiness and generalizability of your results.  
-
-
-\section{Defining research questions}
-
-\section{Preliminary goals:}
-\normalsize
-\begin{enumerate}[label=PG\arabic*., leftmargin=*]
-    \item Create a proof of concept of a highlight algorithm, that finds "better" highlights for a given player in a match
-    \item Find out what is required for an alternative highlight algorithm, what metrics players prefer
-    \item Find what makes a highlight "better" and increases enjoyment when watching a highlight.
-\end{enumerate}
-
-\section{Preliminary research questions:}
+\section{Research questions:}
 \normalsize
 \begin{enumerate}[label=RQ\arabic*., leftmargin=*]
     \item How can one create an algorithm to find better highlights in Counter Strike 2? \\\\
@@ -24,7 +10,14 @@ Here you specify and motivate your research questions or hypotheses and relate t
     Finding out what is required for a highlight and what players prefer can help in further research into the subject and can even connect to other games where similar highlights can be of interest.
     \item How do the perceptions of what makes a good highlight differ between novice and experienced players?\\\\
     Finding out the difference between perception of highlights of a seasoned player or someone who has not as much or no experience gives us a insight how you can direct highlights so that they can be enjoyed by different demographics. 
-    
+\end{enumerate}
+\section{Goals:}
+\normalsize
+\begin{enumerate}[label=PG\arabic*., leftmargin=*]
+    \item Create a proof of concept of a highlight algorithm, that finds "better" highlights for a given player in a match
+    \item Find out what is required for an alternative highlight algorithm, what metrics players prefer
+    \item Find what makes a highlight "better" and increases enjoyment when watching a highlight.
+
 \end{enumerate}
 Research question number 1 is connected to goal 1. Question 2 is connected to goal 2. Question 3 is connected to goal 3.\\\\
 The value of these goals can affect and be used by players of the Counter Strike 2, others that are interested in the topic of highlight making/analyzing, and for spectators of the game.\\\\
@@ -32,9 +25,9 @@ The value of these goals can affect and be used by players of the Counter Strike
 \section{Describing your research method}
 We use a proof of concept and mixed-methods approach with surveys and interviews in this study. The interviews are conducted to get a better insight into what and how to weigh different metrics that will be used in the algorithm. The surveys serve the purpose of comparing our algorithm with existing highlight tools. This way we can see if our algorithm could be considered better at finding highlights.
 \subsection{Proof of concept of an algorithm}
-
 \subsubsection{Initial plan}
-The initial plan was to have a system in which the \Gls{Demofile} is analyzed and all the results of the different metrics are multiplied by a weight and then added to a final score. Some of the metrics are ones that you want to be lower, like the time between each kill, and if you die. The formula would look something like this.
+\todo{remove 4th level headings}
+The initial plan was to have a system in which the \gls{Demofile} is analyzed and all the results of the different metrics are multiplied by a weight and then added to a final score. Some of the metrics are ones that are better when they are lower, like the time between each kill, and if you die. The formula would look something like this.
 
 $$\text{Total Score} = \sum_{i=0}^{x} weight_i \times metric_i $$
 
@@ -44,7 +37,7 @@ where x is the number of metrics
 
 Implementing the analyzer step was a lot of code to write, but not much advanced code. Mostly it was reading some value for each player every round, and storing those values in a Metrics class. This class held all information about a players metric for a given round, and contained some helper methods to set the metrics in a cleaner way.
 
-One of the metrics that was hard to implement was the \Gls{jumpshot}s. Until very recently (2024-04-24), there was no built in way of checking if a player was in the air or not, but right in time, Valve, the developer of Counter strike 2, added a new feature\cite{onTheOtherHandReleaseNotes} to show if a player is in the air during a kill.
+One of the metrics that was hard to implement was the \gls{jumpshot}s. Until very recently (2024-04-24), there was no built in way of checking if a player was in the air or not, but right in time, Valve, the developer of Counter strike 2, added a new feature\cite{onTheOtherHandReleaseNotes} to show if a player is in the air during a kill.
 
 Before this, our solution was to check the Y position of the player over a two second windows, one second before until one second after. After this, we checked the position of the player and made sure that the players velocity was an arch, starting going high, and then curving back down. This solution has issues, a ladder or stairs could fool this solution, so the newer update was very helpful.
 
@@ -53,7 +46,7 @@ Before this, our solution was to check the Y position of the player over a two s
 The final product contains a web interface, that made it easier for us to use and look at the metrics and whats going on. This was helpful for debugging issues with the analyzer, as well to see why a round got the score it did. The full process is that you upload the demo file you want to analyze onto the site, this gets passed to a DemoAnalyzer instance, that extracts the demo information. This then loads up a page where we can see all the metrics, for all the players, in all rounds. The round score for each round is automatically calculated, and the best round score of the match gets displayed on the site, along with the metrics for that round. This is how we determined what clips were supposed to be used for the survey. The web page could be adapted for user consumption, by just hiding the details of the round.
 
 \paragraph{Linear Metrics}
-For all linear metrics that we have, we map the input to somewhere between 0 - 100. This was we handle cases where two metrics are of the same importance, but the value they give are orders of magnitude off each other. An example would be damage, and kills (genom) smokes. You can only get a maximum of 5 kills trough smokes, but you can get up to 500 damage. This was if i get 2 smoke kills and 200 damage, both will output 40. We used a linear mapping function for this. The function is explained below
+For all linear metrics that we have, we map the input to somewhere between 0 - 100. This was we handle cases where two metrics are of the same importance, but the value they give are orders of magnitude off each other. An example would be damage, and kills trough smokes. You can only get a maximum of 5 kills trough smokes, but you can get up to 500 damage. This was if i get 2 smoke kills and 200 damage, both will output 40. We used a linear mapping function for this. The function is explained below
 
 The metrics that use this method of scoring is:
 \begin{itemize}
@@ -95,7 +88,7 @@ This uses a exponential decay function. This is because the lower the health of 
 $$x) = 100 \cdot e^{-ax}  \qquad \text{where } a = 0.03$$
 This is then mapped using the function mapToScore from before to a number between 0 and 100. After the normalizing we multiply this by the weight for the metric. 
 \todo{explain how the function works and how we came p with it}
-This formula is an exponential decay function. It models the decrease in \acrshort{hp} Left Value as the input value (x) increases. The growth rate (a) controls how quickly the value decays. A higher growth rate means a faster decay. \todo{CHATGPT WRITTEN}
+This formula is an exponential decay function. It models the decrease in \acrshort{hp} Left Value as the input value (x) increases. The growth rate (a) controls how quickly the value decays. A higher growth rate means a faster decay. 
 
 We choose 0.03 as the $a$ value since this makes the points for that metric go up around the 35 \acrshort{hp} mark, that being one shot away from death from most strong weapons.
 
@@ -135,7 +128,7 @@ This is done for each one of the weapons added together and finally multiplied w
 
 
 \paragraph{Side}
-When looking at what side the player is playing on, either \acrshort{t} or \acrshort{ct}, we looked at the win rate for each side for the last 6 months\cite{hltvMapStats}. Here we saw a quite even split, but based on the map in the current competitive map pool, \acrshort{ct} has a higher win rate on the majority of the maps. Therefore we assign \acrshort{t} and \acrshort{ct} -1 and 1, then in the weights, it has a negative value, so that the -1 for \acrshort{t} get awarded more points than \acrshort{ct}.
+When looking at what side the player is playing on, either \acrshort{t} or \acrshort{ct}, we looked at the win rate for each side for the last 6 months\cite{hltvMapStats}. Here we saw a quite even split, but based on the map in the current competitive map pool, \acrshort{ct} has a higher win rate on the majority of the maps. Therefore, we assign \acrshort{t} and \acrshort{ct} -1 and 1, then in the weights, it has a negative value, so that the -1 for \acrshort{t} get awarded more points than \acrshort{ct}.
 
 
 \subsubsection{Technologies used}
@@ -143,7 +136,7 @@ Our algorithm was built using Typescript as the language of choice. This choice 
 
 Counter-strike 2 records everything that happens in a match in a \Gls{demo} file. To parse this information, we used a library\cite{demoparser} that would give us events from the match, such as whenever a player dies, shoots, or when the rounds start or end. This library does not give us the data we need directly, so for that we need to parse information from the events available. So for that we need to analyze the data from the demo, to later pass to our algorithm to calculate with \todo{EXPLAIN MORE????}
 \subsubsection{How it works}
-The first part of the process to generate a highlight is to extract the metrics from the demo file. This is done in a file called DemoAnalyzer.ts, and this fine handles reading the \Gls{demo} file and transforming the data into a usable format. It does this by looking at different events \todo{list events??} and calculate the metrics. \todo{explain how some of them work?}.
+The first part of the process to generate a highlight is to extract the metrics from the demo file. This is done in a file called DemoAnalyzer.ts, and this file handles reading the \Gls{demo} file and transforming the data into a usable format. It does this by looking at different events \todo{list events??} and calculate the metrics. \todo{explain how some of them work?}
 
 The next part is to store the metrics in the database. This is handled by a separate file `SaveDemoInfo.ts`. This file reads the data, and puts it into tables in the database. The reason for making this a separate step was for readability and code quality. This splits up the code into the analyzer, that is only responsible for reading the data, and storing it in memory, and the SaveDemoInfo part, that only focuses on storing the data. 
 
@@ -153,7 +146,7 @@ After the mapping function has given its value between 0 and 100, this then is w
 
 \subsection{Survey}
 \label{sec:survey}
-A survey will be created with our algorithm's outputted round and the Allstar{glossarie} tool's "play of the game" round, where the same matches are evaluated on the same player, and the participant can choose which they prefer. Both rounds will be re-recorded so that a fair comparison can be made without editing and each clip starts a few seconds before and action such as shooting, spotting an enemy or throwing utility is done.\\\\
+A survey was created with our algorithm's outputted round and the Allstar\todo{add glossarie} tool's "play of the game" round, where the same matches are evaluated on the same player, and the participant can choose which they prefer. Both rounds will be re-recorded so that a fair comparison can be made without editing and each clip starts a few seconds before and action such as shooting, spotting an enemy or throwing utility is done.\\\\
 \textbf {Content for the survey:}
 \begin{itemize}
     \item The respondent will be prompted to answer a question about how familiar they are with the game Counter-Strike 2. This will be presented in a type of likert scale. 
@@ -227,4 +220,5 @@ The answers we gathered here lays a base on how we weigh our metrics but could b
 
 \section{Validity and reliability of your approach}
 Our approaches of collecting data through interviews was done via discord where we recorded the interview. This was done so that we could have a greater reach of who we interviewed. This made it possible to get a bigger size pool of different people. We also had to take into account that the people we wanted to interview had played Counter Strike or similar games.\\\\ We recognized that it would be hard to fairly value metrics, as there a many, but the approach we took made it so that if there are metrics not mentioned by us in the interview the interviewee could have the possibility to add metrics.\\\\
-Our approaches of collecting data through surveys was done via Google forms to compare our algorithm with the existing highlight tool ALLSTAR. The participants would not know which clip came from ALLSTAR or our algorithm. As the clips created are from the same matches and the same persons when comparing this makes it as un-biased as possible. The games where from our own games history from the dates {INSERT DATE} to {INSERT DATE}. In case our algorithm and Allstar outputted the same round a new match was picked and the instance noted down. 
+Our approaches of collecting data through surveys was done via Google forms to compare our algorithm with the existing highlight tool Allstar. The participants would not know which clip came from Allstar or our algorithm. As the clips created are from the same matches and the same persons when comparing, this makes it as unbiased as possible. The games were from our own games history from the dates 2024-05-09 to 
+2024-05-04. In case our algorithm and Allstar outputted the same round, a new match was picked, and the instance noted down. 

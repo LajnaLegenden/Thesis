@@ -166,7 +166,7 @@ Overall, the respondents liked Video A for its clutch, and higher kill count and
 \end{figure}
 \subsection{Match 9}
 
-Video B won here due to its better gamesense, and that it was fast paced. The highlight was long and showed that it took a long time for the player to win the round.
+Video B won here due to its better game sense, and that it was fast-paced. The highlight was long and showed that it took a long time for the player to win the round.
 The reasoning given from the respondents were:
 
 \begin{itemize}
@@ -188,7 +188,7 @@ The first thing one needs to do is to figure out what metrics should be included
 
 Next step in the process to create an algorithm for highlights is to extract the data. Here there is a few approaches that you can take. There is the approach that we took, which is implementing a parser step, to extract all relevant data from the demo file, and gives it into an workable format for the algorithm. Another way to do this is to analyze the video feed from either a screen capture or from a video file. This would require looking at properties of the video / stream, for example watching the kill feed or chat with OCR, and extract data from that, as well as other game information from the UI. Another approach is to use Counter Strike game state integration to get the data in real time from the game itself during the match. This would allow taking a clip of the user screen instead of having to render the clip on a separate server. The game state integration provides much the same data as a demo file would, but in real time.
 
-Once the data has been collected, you would need to analyze that somehow. This is the most "free" part. depending on what you want to include in the highlights, this will differ a lot. In our case, we focused on mechanical plays, like kills and the skill of the player, but another way would be to focus on funny plays.
+Once the data has been collected, you would need to analyze that somehow. This is the most "free" part. Depending on what you want to include in the highlights, this will differ a lot. In our case, we focused on mechanical plays, like kills and the skill of the player, but another way would be to focus on funny plays.
 
 Once this is done, the last part is to output the round number of the highlight, and what player did the highlight. Processing this and rendering the highlight is outside the scope of this algorithm.
 \section{What metrics are most important when developing an algorithm to find highlights in Counter Strike 2}
@@ -200,36 +200,36 @@ To find what metrics, that are important for Counter Strike 2 highlights, we con
 \paragraph{What do you think is the most memorable highlight in Counter Strike history?}
 6 out the 7 interviewees answered this question:
 \begin{itemize}
-    \item "I think the happy 1Deag ace on Banana" {benjamin}
-    \item "Yes absolutely. After all, I have both famous ones from big tournaments or matches like Coldzera when he jumps and shoots on Mirage."{Limpan}
-    \item "When you get a four K. It's cool stuff like that." {Otto}
-    \item "I think that when you kill a whole team, that's like you just rampage." {Onlyswen}
-    \item "But if I'm off the cuff, what pops into my head is Hiko. When he was clutching Dust 2 or something like that."{Aiimar}
-    \item "It's probably OlofPass actually. Because then I was there when he made that boost."{Zpam}
+    \item "I think the happy 1Deag ace on Banana" (Participant B1, personal communication, April 21, 2024)
+    \item "Yes absolutely. After all, I have both famous ones from big tournaments or matches like Coldzera when he jumps and shoots on Mirage."(Participant L1, personal communication, April 10, 2024)
+    \item "When you get a four K. It's cool stuff like that." (Participant O1, personal communication, April 30, 2024)
+    \item "I think that when you kill a whole team, that's like you just rampage." (Participant O2, personal communication, April 16, 2024)
+    \item "But if I'm off the cuff, what pops into my head is Hiko. When he was clutching Dust 2 or something like that."(Participant A1, personal communication, April 09, 2024)
+    \item "It's probably OlofPass actually. Because then I was there when he made that boost."(Participant J1, personal communication, April 26, 2024)
 \end{itemize}
 \paragraph{What makes it memorable?}
 Those who mentioned a specific clip said:
 \begin{itemize}
-    \item "The casters. Caster. Yeah. I suppose also the importance of the round." {benjamin}
-    \item "The important thing is either that it is some kind of personal reference. That it's someone you know that you play with or that you watch that you know or something. Or that there is something big at stake, like a big tournament, big match or professional team. Then it will be memorable right away." {Limpan}
-    \item "For me, that's what makes a good highlight. Precisely the part that lifts it is the skill demonstration. But also when the commentator is so damn hyped. That combination to me is absolutely fantastic. You get a lot of everything. If it's not from the clip, it's from the commentator. This for me means a lot. Unless there is no caster. Which it is not when you play yourself. Then music can be the supporting part. That you have music that is timed with the shot or similar." {Aiimar}
-    \item "It was that one that caused so much speculation and everything afterwards. The players had no idea it was super controversial and all. There is also a P3 documentary about this. Just that specific event. And then that it was also ten years ago and that it is still very, very memorable. And then that he is Swedish too." {zpam}
+    \item "The casters. Caster. Yeah. I suppose also the importance of the round." (Participant B1, personal communication, April 21, 2024)
+    \item "The important thing is either that it is some kind of personal reference. That it's someone you know that you play with or that you watch that you know or something. Or that there is something big at stake, like a big tournament, big match or professional team. Then it will be memorable right away." (Participant L1, personal communication, April 10, 2024)
+    \item "For me, that's what makes a good highlight. Precisely the part that lifts it is the skill demonstration. But also when the commentator is so damn hyped. That combination to me is absolutely fantastic. You get a lot of everything. If it's not from the clip, it's from the commentator. This for me means a lot. Unless there is no caster. Which it is not when you play yourself. Then music can be the supporting part. That you have music that is timed with the shot or similar." (Participant A1, personal communication, April 09, 2024)
+    \item "It was that one that caused so much speculation and everything afterwards. The players had no idea it was super controversial and all. There is also a P3 documentary about this. Just that specific event. And then that it was also ten years ago and that it is still very, very memorable. And then that he is Swedish too." (Participant J1, personal communication, April 26, 2024)
 \end{itemize}
 \paragraph{What makes a good highlight?}
 
 \begin{itemize}
-    \item "Quick succession. Quick responses. Like going from one to the other in rapid succession. And quantity of kills usually."
-    \item "Yes, but it is something that is either completely improbable, insanely difficult to succeed with"
-    \item "But it's clips like this where you beat all the odds and manage to clutch a round. Or then something funny happens that causes you to drop from heaven on nuke and then you die. And then the others win."
-    \item "A good highlight is made when there are a lot of people watching at the same time when a good commentator at a professional match does a lot. And the circumstances, such as the thing that he is in Sweden and does such a thing against a non-Swedish team, means that everyone gets extra hyped."
-    \item "And the best is probably if it's one against five or similar so that everyone can see you when you play."
-    \item "It could be a skill demonstration of how to aim your crosshair. It can be your movement in the game. It doesn't have to be that you bunny hop on mirage to short. It could just be that you're timing nicely. That you read the opponents. That you let people pass. There is so much that can make a good highlight. I have a hard time pointing to a thing. But if I have to point to one thing, it's one taps. I think that is absolutely fantastic. I think that is always worth including in a highlight. Deagle OneTaps. It could be AKs. If you do it several times in the same round or you have 5 kills via OneTaps."
-    \item "But I think the technical stuff."
-    \item "It must be something cool that happened. The more kills the better. The faster the guys, the closer the guys are to each other, the better. The more shady the weapon if you do something cool with it the better."
-    \item "So if you dodge around a corner or something or have to do a lot of shit to get to the kill itself, that's more impressive."
+    \item "Quick succession. Quick responses. Like going from one to the other in rapid succession. And quantity of kills usually." (Participant B1, personal communication, April 21, 2024)
+    \item "Yes, but it is something that is either completely improbable, insanely difficult to succeed with" (Participant L1, personal communication, April 10, 2024)
+    \item "But it's clips like this where you beat all the odds and manage to clutch a round. Or then something funny happens that causes you to drop from heaven on nuke and then you die. And then the others win." (Participant L1, personal communication, April 10, 2024)
+    \item "A good highlight is made when there are a lot of people watching at the same time when a good commentator at a professional match does a lot. And the circumstances, such as the thing that he is in Sweden and does such a thing against a non-Swedish team, means that everyone gets extra hyped." (Participant J1, personal communication, April 26, 2024)
+    \item "And the best is probably if it's one against five or similar so that everyone can see you when you play." (Participant J1, personal communication, April 26, 2024)
+    \item "It could be a skill demonstration of how to aim your crosshair. It can be your movement in the game. It doesn't have to be that you bunny hop on mirage to short. It could just be that you're timing nicely. That you read the opponents. That you let people pass. There is so much that can make a good highlight. I have a hard time pointing to a thing. But if I have to point to one thing, it's one taps. I think that is absolutely fantastic. I think that is always worth including in a highlight. Deagle OneTaps. It could be AKs. If you do it several times in the same round or you have 5 kills via OneTaps." (Participant A1, personal communication, April 09, 2024)
+    \item "But I think the technical stuff." (Participant E1, personal communication, April 14, 2024)
+    \item "It must be something cool that happened. The more kills the better. The faster the guys, the closer the guys are to each other, the better. The more shady the weapon if you do something cool with it the better." (Participant O1, personal communication, April 30, 2024)
+    \item "So if you dodge around a corner or something or have to do a lot of shit to get to the kill itself, that's more impressive." (Participant O2, personal communication, April 16, 2024)
 \end{itemize}
 
-\paragraph{Rate these metrics from 1-10:}
+\paragraph{Rate these metrics from 1-10:}\todo{move over pictu}
 
     \begin{figure}[H]
         \centering
@@ -251,25 +251,25 @@ Those who mentioned a specific clip said:
     \end{figure}
     \textbf{Are there any metrics we forgot?}
     \begin{itemize}
-        \item "After all, it is to create a metric to start running highlights when enemies are close to each other. Like in smokes or distance wise. Because if you are very close to each other on a site or something, highlights are rarely created there." {limpan}
-        \item "Well, hit percentage of the amount of bullets fired, right? I'm thinking, well, more or less. Oh, one second. Yeah, no, that's about it. The hit ratios are important to me. And maybe crosshair placement." {benjamin}
-        \item "Kind of like Olofboost there." {zpam}
-        \item "Something you didn't mention was this movement thing." {Aiimar}
-        \item "Real movement players." {otto}
+        \item "After all, it is to create a metric to start running highlights when enemies are close to each other. Like in smokes or distance wise. Because if you are very close to each other on a site or something, highlights are rarely created there." (Participant L1, personal communication, April 10, 2024)
+        \item "Well, hit percentage of the amount of bullets fired, right? I'm thinking, well, more or less. Oh, one second. Yeah, no, that's about it. The hit ratios are important to me. And maybe crosshair placement." (Participant B1, personal communication, April 21, 2024)
+        \item "Kind of like Olofboost there." (Participant J1, personal communication, April 26, 2024)
+        \item "Something you didn't mention was this movement thing." (Participant A1, personal communication, April 09, 2024)
+        \item "Real movement players." (Participant O1, personal communication, April 30, 2024)
     \end{itemize}
 \paragraph{Do you use any tool to create highlights?}
 \begin{itemize}
-    \item "I don't use anything. If I were to do it, I would use something that was simple and fast. Which fixed nice highlights. Which I could save and display. So, share those that might be able to be sent on discord directly. Or similar. Like GIFS." {limpan}
-    \item  "Yeah, FaceIt, like the FaceIt one." {benjamin}
-    \item "And I use medal just to do it manually."{benjamin}
-    \item "No, no more than the automatic that comes, for example, on e-sportal or results or something like that." {zpam}
-    \item "And then there's also GeForce Experience as well." {zpam}
+    \item "I don't use anything. If I were to do it, I would use something that was simple and fast. Which fixed nice highlights. Which I could save and display. So, share those that might be able to be sent on discord directly. Or similar. Like GIFS." (Participant L1, personal communication, April 10, 2024)
+    \item  "Yeah, FaceIt, like the FaceIt one." (Participant B1, personal communication, April 21, 2024)
+    \item "And I use medal just to do it manually."(Participant B1, personal communication, April 21, 2024)
+    \item "No, no more than the automatic that comes, for example, on e-sportal or results or something like that." (Participant J1, personal communication, April 26, 2024)
+    \item "And then there's also GeForce Experience as well." (Participant J1, personal communication, April 26, 2024)
     \item "I used Medal around a year and a half ago. Then there was a lot of recording" {aiimar}
-    \item "Leetify" {otto} 
-    \item "Yeah, Gif your game. Gif your game, but that's all." {sven}
+    \item "Leetify" (Participant O1, personal communication, April 30, 2024)
+    \item "Yeah, Gif your game. Gif your game, but that's all." (Participant O2, personal communication, April 16, 2024)
     
 \end{itemize}
 
 \section{How do the perception of what makes a good highlight differ between novice and experienced players}
-
+In the interviews, the biggest difference between novice and experienced players was in the specificity of the answers, those with less experience had a harder time explaining what they liked in a highlight. There was also less real life examples of highlights from those who had less experience.
 
