@@ -1,45 +1,275 @@
 \chapter{Results and Analysis WHAT}
 \label{chp:results}
 \section{On the content}
-\textbf{Our text:}\\
-\section{Results from interviews}
+\section{Survey results}
+\label{chp:surveyResults}
+Looking at the survey results, we can see that our algorithm won $\frac{2}{3}$ of the times, as can be seen in figure \ref{fig:surveyOverall}. This indicates that our algorithm is more suitable for finding highlights for certain types of players. Most of the respondents were very familiar with the game, showing that experienced players seemed to like our implementation.
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{66.6/Our algorithm,33.3/Allstar} 
+\end{tikzpicture}
+\caption{Pie chart showing what algorithm won in the survey}
+\label{fig:surveyOverall}
+\end{figure}
+\subsection{Match 1}
+\textbf{old text}
+In the first match, our algorithm just took the win. It is not a large win by any stretch of the imagination, but based on the comments added by the respondent, both highlights are very close. However, a respondent said that Video A was more tactical, but that both clips were clean. Another user, who preferred Video B, said that that play was more fearless. The people that choose B seemed to think video B has more action and better decision making. The people who chose A commented on how \gls{clean} it was
 
-The interviews were focusing on the metrics and what people liked about highlights. The interviews lay a baseline on what metrics should be included and metrics we already have included should be valued. The individuals we interviewed had different experience with highlights, Counter Strike 2 and other FPS games. Out of the 8 interviews we conducted, all had at least played one game of Counter Strike and knew of the game. Some with more experience than others. Many of the interviewees have a couple of thousand hours in the Counter Strike scene and are or have been invested in the game for years, while others have just a couple of games under their belt.\\\\
-\subsection{First question}
-The first question we asked the interviewees was, "What is your experience with Counter Strike or other FPS games?". From this question, we can have a broader aspect of what people with different experience think of such a topic as highlights in a game such as Counter Strike. The result we got from the question was that 6 out of 8 had a lot of experience in the game Counter Strike. While one interviewee had minimal experience with the game and another did not have much experience in Counter Strike but in other FPS games. One interviewee said, "I've been playing CS since I was a kid, more or less, 1.6. And then Source and all that. And then I started playing CS a lot in 2014. And have been playing CS since then every week. Since 2014 approximately. With some breaks here and there. But relatively regularly every year I played CS."\\\\
-\subsection{Second question}
-The second question we asked was "What is your experience with highlights in FPS games?". The result we got from this question was that most of the interviewees knew what they were, or with reference to other activities could understand the concept of a highlight. Many of the interviewees that had a lot of hours in Counter Strike had used programs such as Medal or similar to record the last 30 seconds or more to later edit or just save the clips. Others also answered with automatic clipping tools from sites such as Leetify and Esportal. Two out of the eight interviewees had no experience with highlights in FPS games.\\\\
-\subsection{Third question}
-The third question we asked, "What do you think is the most memorable highlight in Counter Strike history?". Here again the interviewees with a lot of hours in Counter Strike could reference highlights from the e-sport scene. Highlights that were mentioned was "happy 1Deag ace on Banana" \textbf{BENJAMIN REFRENCE} which happened during the game between the e-sport teams "EnVyUs vs TSM" where the player Happy eliminates the whole enemy team with the weapon Desert Eagle during DreamHack Open London 2015. Another interviewee mentions "After all, I have both famous ones from big tournaments or matches like Coldzera when he jumps and shoots on Mirage."\textbf{LIMPAN REFRENCE} which refences to a match between "Luminosity vs Liquid" during MLG Columbus 2016. The last refrence we get to e-sport matches is with an interviwee that says, "What I think is the best? Off the cuff, what pops into my head is Hiko. When he was clutching Dust 2 or something like that." Which references to the clip of the pro player Hiko getting a 180 degree flickshot on an enemy hiding behind a door on the map Dust2 during EMS One Katowice 2014 major.\\\\
-The other interviewees answered with more general answers such as highlights that they had experience on their own, such as when they eliminated four players in a single round or when they eliminated the whole enemy team.\\\\
-The follow-up question to the previous question is "What makes the highlight memorable?". Here we get interviewees referencing to casters of e-sports games "For me, that's what makes a good highlight. Precisely the part that lifts it is the skill demonstration. But also when the commentator is so damn hyped. That combination to me is absolutely fantastic. You get a lot of everything. If it's not from the clip, it's from the commentator. This for me means a lot. If it is no commentator. Which it is not when you play yourself. Then music can be the supporting part. That you have music that is timed with the shot or similar." \textbf{AIIMAR REFRENCE} another answered "The casters. Caster. Yeah. I suppose also the importance of the round". Others mentions the technical skills of the player, they won an impossible round or one answered "It must be something cool that happened. The more kills, the better. The faster the kills, the closer the kills are to each other, the better. The more shady the weapon, if you do something cool with it, the better." \textbf{WOTTOWMAN02 REFERENCE}\\\\
-\subsection{Fourth question}
-The fourth questions we asked was "What makes a good highlight?". From these questions we got a lot of different answers. One interviewee answered with "Quick succession. Quick responses. Like going from one to the other in rapid succession. And quantity of kills, usually." \textbf{BENJAMIN REFRENCE} while another answered with "I have a hard time pointing to a thing. But if I have to point to one thing, it's one taps. I think that is absolutely fantastic. I think that is always worth including in a highlight. Deagle OneTaps. It could be AKs. If you do it several times in the same round, or you have 5 kills via OneTaps." \textbf{AIIMAR REFERENCE}. These answers focus on the technical skill aspects of the highlights, while one interviewee said "A good highlight is made when there are a lot of people watching at the same time, when a good commentator at a professional match does a lot. And the circumstances, such as the thing that he is in Sweden and does such a thing against a non-Swedish team, means that everyone gets extra hyped."\textbf{zpam REFERENCE} about the pro-scene and on individual level said "Then it is probably important that you want to play with friends. So that they actually see you. And the best thing is if it's one against five or similar so that everyone can see you when you play." \textbf{zpam REFRENCE} focusing more on the social aspect of highlights and that it is something that gets the crowd or friends going. So from this we can gather that depending on the context of the game context and what scene players are playing in, there is a difference on what is considered highlight worthy.\\\\
-\subsection{Fifth question}
-Question five was about valuing metrics we provided to the interviewees from 1 to 10.
-        \begin{itemize}
-        \item Amount of kills: average = 8
-        \item if the player died: average = 6,142857143
-        \item Weapon used average: = 7,071428571
-        \item Time between each kill: average = 7,142857143
-        \item Bullets fired average: = 7,357142857
-        \item Team side: average = 2,428571429
-        \item Player position (Distance): average = 6,285714286
-        \item Airborne average: = 8,285714286
-        \item Headshot average: = 7,785714286
-        \item Damage given average: = 5,928571429
-        \item HP of the player average: = 6,714285714
-        \item No scope with scoped weapons average: = 7,071428571
-        \item Shooting through objects average: = 8,142857143
+For this set of highlights, video A won by a slim margin. The people that taught video a was the better one commented on that it was more tactical and \gls{clean}. That the AK47 was used instead of the glock also attracted some viewers. One respondent said that; "It was a good clutch". The respondents that liked video B had the opinion that that highlight had more action. The people who responded indifferently mentioned that both clips were the same in terms of level of game play.
+
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{40/ Video A (Our algorithm),36/Video B (AllStar), 24/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 1}
+\label{fig:match1}
+\end{figure}
+
+
+\subsection{Match 2}
+For this set of highlights, video B took the win, with a little more than half of the respondents liking this highlight more. Respondents mentioned that the knife kill during video B was a large factor, and that the kills were all solo plays, with no help from teammates. They also mentioned that video A was more messy and video B was more clean.
+
+
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{34.6/ Video A (Our algorithm),57.7/Video B (AllStar), 7.7/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 2}
+\label{fig:match2}
+\end{figure}
+\subsection{Match 3}
+For this set of highlights Video B was the winning highlight. While several viewers liked the impressive 4K spraydown and first kills in Video A, the majority found the gameplay in Video B to be better.
+
+Some comments highlighted specific reasons why Video B was more appealing.
+
+\begin{itemize}
+\item \textbf{Better decision-making:} One respondent said that "The Read on The Game is on the 2nd Video way more accurate."
+\item \textbf{Map awareness:} Another respondent said "Better checks on corners."
+\item \textbf{Overall gameplay:} Several viewers simply stated their preference for Video B, indicating a more enjoyable viewing experience.
+\end{itemize}
+
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{65.4/ Video B (Our algorithm),19.2/Video A (AllStar), 15.4/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 3}
+\label{fig:match3}
+\end{figure}
+\subsection{Match 4}
+
+
+For this set of highlights Video B was the winning highlight for a few reasons.
+
+\begin{itemize}
+\item \textbf{Fast-paced action:} One respondent stated, "Video B was way fast paced, which I like more."
+\item \textbf{Strategic gameplay:} One respondent commented: "Just a better round, he knows what he is doing and plays around the enemies making mistakes" which shows a more calculated approach to the game.
+\item \textbf{Map control:} Another viewer noted that "Video B felt like it opened up an A push pretty cleanly," showing that taking initiative, and opening up a site makes a good highlight.
+\end{itemize}
+
+Overall, viewers found Video B to be a better highlight, due to its faster and more strategic gameplay. The criticism of Video A mentioned a hesitation to push forward, and some bad mechanics regarding jump spotting.
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{50/ Video B (Our algorithm),42.3/Video A (AllStar), 7.7/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 4}
+\label{fig:match4}
+\end{figure}
+\subsection{Match 5}
+
+
+People liked Video B more in this set of highlights.
+The reasons that the respondents liked video B more:
+
+\begin{itemize}
+\item \textbf{Used smoke well:} "Played the smoke (very nice!) on video B"
+\item \textbf{Got more kills:} "In video B he does not die, and gets most of the kills"
+\item \textbf{Won the round:} "He didnt die, and won round"
+\end{itemize}
+
+While some people liked the skills shown in Video A, most preferred Video B because the player made good choices and won their team the round, as well as he did not die.
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{57.7/ Video B (Our algorithm),34.6/Video A (AllStar), 7.7/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 5}
+\label{fig:match5}
+\end{figure}
+\subsection{Match 6}
+
+Most people liked Video B more, saying it had cleaner kills. Some people liked Video A because it was fast-paced and showed teamwork.
+
+The difference between the highlights were:
+\begin{itemize}
+\item \textbf{Video A - Fast and teamwork:} Some respondents liked how Video A was quicker and showed the whole team working together.
+\item \textbf{Video B - Cleaner kills:} Others thought the kills in Video B looked nicer and smoother.
+\end{itemize}
+
+A few respondents said both videos were good and bad in different ways. Some also mentioned the teamkills during that round.
+
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{38.5/ Video A (Our algorithm),46.2/Video B (AllStar), 15.4/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 6}
+\label{fig:match6}
+\end{figure}
+\subsection{Match 7}
+The survey results shows that people liked Video A more. Video A had more kills, including a cool 2-kill spraydown, and the player got the last kill. Some people also liked that it was faster-paced.
+
+\begin{itemize}
+\item \textbf{More kills and a cool spray:} "More kills, aswell as a nice 2K spraydown."
+\item \textbf{Got the last kill:} "He made the last kill himself in Video A liked that better."
+\item \textbf{Faster pace:} "it was also way more fast paced."
+\end{itemize}
+
+Some people liked Video B and thought the player made smarter choices, but overall, Video A was more popular.
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{46.2/ Video B (Our algorithm),38.5/Video A (AllStar), 15.4/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 7}
+\label{fig:match7}
+\end{figure}
+\subsection{Match 8}
+The survey shows that video A was the preferred highlight, particularly for the clutch situation, cleaner kills, and higher kill count. While Video B was liked for its efficient 3K, some respondents noted the opponent's missed AWP shots as a huge reason that the highlight even was possible.
+
+\begin{itemize}
+\item \textbf{Video A's clutch and kills:} Several viewers favored Video A for the player's ability to secure kills in a clutch situation and the overall higher kill count.
+\item \textbf{Video A's cleaner kills:} Some viewers specifically mentioned that the kills in Video A were cleaner and more impressive.
+\item \textbf{Video B's methodical 3K:} While acknowledging the skill involved in the 3K in Video B, viewers also pointed out the opponent's missed AWP shots was the only reason this highlight was possible.
+\end{itemize}
+
+Overall, the respondents liked Video A for its clutch, and higher kill count and overall was cleaner and Video B was liked for its systematic approach even tho some luck was involved.
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{65.4/ Video A (Our algorithm),26.9/Video B (AllStar), 7.7/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 8}
+\label{fig:match8}
+\end{figure}
+\subsection{Match 9}
+
+Video B won here due to its better gamesense, and that it was fast paced. The highlight was long and showed that it took a long time for the player to win the round.
+The reasoning given from the respondents were:
+
+\begin{itemize}
+\item \textbf{Video B's better kills:} Multiple viewers highlighted Video B's better kills, with one specifically mentioning the "clean glock 2K."
+\item \textbf{Fast-paced action:} Viewers enjoyed the fast pace of Video B, particularly the initial kills.
+\end{itemize}
+\textbf{URLS HERE}
+\begin{figure}
+\centering
+\begin{tikzpicture}[object/.style={thin,double,<->}]
+ \pie{26.9/ Video A (Our algorithm),61.5/Video B (AllStar), 11.5/Indifferent} 
+\end{tikzpicture}
+\caption{Result from Match 9}
+\label{fig:match9}
+\end{figure}
+
+\section{How can one create an algorithm to find better highlights in Counter Strike 2}
+The first thing one needs to do is to figure out what metrics should be included in the algorithm. Here, you could interview people in the scene with experience, like casters, analysts, and players of the game. You can also study popular highlights from the community, and see what metrics are the highest in the highlights you watched, and use that as a baseline for what metrics are important to include in highlights. 
+
+Next step in the process to create an algorithm for highlights is to extract the data. Here there is a few approaches that you can take. There is the approach that we took, which is implementing a parser step, to extract all relevant data from the demo file, and gives it into an workable format for the algorithm. Another way to do this is to analyze the video feed from either a screen capture or from a video file. This would require looking at properties of the video / stream, for example watching the kill feed or chat with OCR, and extract data from that, as well as other game information from the UI. Another approach is to use Counter Strike game state integration to get the data in real time from the game itself during the match. This would allow taking a clip of the user screen instead of having to render the clip on a separate server. The game state integration provides much the same data as a demo file would, but in real time.
+
+Once the data has been collected, you would need to analyze that somehow. This is the most "free" part. depending on what you want to include in the highlights, this will differ a lot. In our case, we focused on mechanical plays, like kills and the skill of the player, but another way would be to focus on funny plays.
+
+Once this is done, the last part is to output the round number of the highlight, and what player did the highlight. Processing this and rendering the highlight is outside the scope of this algorithm.
+\section{What metrics are most important when developing an algorithm to find highlights in Counter Strike 2}
+To find what metrics, that are important for Counter Strike 2 highlights, we conducted interviews. In these interviews, we got different results:
+\paragraph{What is your experience with Counter-Strike or other FPS games?}
+2 out of the 7 had little to no experience with the game Counter Strike, but 6 out of 7 had played similar games.
+\paragraph{What is your experience with highlights in FPS games?}
+2 out of the 7 interviewees had no experience with highlights from FPS games.\\\\
+\paragraph{What do you think is the most memorable highlight in Counter Strike history?}
+6 out the 7 interviewees answered this question:
+\begin{itemize}
+    \item "I think the happy 1Deag ace on Banana" {benjamin}
+    \item "Yes absolutely. After all, I have both famous ones from big tournaments or matches like Coldzera when he jumps and shoots on Mirage."{Limpan}
+    \item "When you get a four K. It's cool stuff like that." {Otto}
+    \item "I think that when you kill a whole team, that's like you just rampage." {Onlyswen}
+    \item "But if I'm off the cuff, what pops into my head is Hiko. When he was clutching Dust 2 or something like that."{Aiimar}
+    \item "It's probably OlofPass actually. Because then I was there when he made that boost."{Zpam}
+\end{itemize}
+\paragraph{What makes it memorable?}
+Those who mentioned a specific clip said:
+\begin{itemize}
+    \item "The casters. Caster. Yeah. I suppose also the importance of the round." {benjamin}
+    \item "The important thing is either that it is some kind of personal reference. That it's someone you know that you play with or that you watch that you know or something. Or that there is something big at stake, like a big tournament, big match or professional team. Then it will be memorable right away." {Limpan}
+    \item "For me, that's what makes a good highlight. Precisely the part that lifts it is the skill demonstration. But also when the commentator is so damn hyped. That combination to me is absolutely fantastic. You get a lot of everything. If it's not from the clip, it's from the commentator. This for me means a lot. Unless there is no caster. Which it is not when you play yourself. Then music can be the supporting part. That you have music that is timed with the shot or similar." {Aiimar}
+    \item "It was that one that caused so much speculation and everything afterwards. The players had no idea it was super controversial and all. There is also a P3 documentary about this. Just that specific event. And then that it was also ten years ago and that it is still very, very memorable. And then that he is Swedish too." {zpam}
+\end{itemize}
+\paragraph{What makes a good highlight?}
+
+\begin{itemize}
+    \item "Quick succession. Quick responses. Like going from one to the other in rapid succession. And quantity of kills usually."
+    \item "Yes, but it is something that is either completely improbable, insanely difficult to succeed with"
+    \item "But it's clips like this where you beat all the odds and manage to clutch a round. Or then something funny happens that causes you to drop from heaven on nuke and then you die. And then the others win."
+    \item "A good highlight is made when there are a lot of people watching at the same time when a good commentator at a professional match does a lot. And the circumstances, such as the thing that he is in Sweden and does such a thing against a non-Swedish team, means that everyone gets extra hyped."
+    \item "And the best is probably if it's one against five or similar so that everyone can see you when you play."
+    \item "It could be a skill demonstration of how to aim your crosshair. It can be your movement in the game. It doesn't have to be that you bunny hop on mirage to short. It could just be that you're timing nicely. That you read the opponents. That you let people pass. There is so much that can make a good highlight. I have a hard time pointing to a thing. But if I have to point to one thing, it's one taps. I think that is absolutely fantastic. I think that is always worth including in a highlight. Deagle OneTaps. It could be AKs. If you do it several times in the same round or you have 5 kills via OneTaps."
+    \item "But I think the technical stuff."
+    \item "It must be something cool that happened. The more kills the better. The faster the guys, the closer the guys are to each other, the better. The more shady the weapon if you do something cool with it the better."
+    \item "So if you dodge around a corner or something or have to do a lot of shit to get to the kill itself, that's more impressive."
+\end{itemize}
+
+\paragraph{Rate these metrics from 1-10:}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=17cm]{Images/All_results.png}
+        \caption{Results from metrics rating}
+        \label{fig:Barchart}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=17cm]{Images/boxplot.png}
+        \caption{Box plot metrics}
+        \label{fig:BoxplotMetrics}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=17cm]{Images/medianMetrics.png}
+        \caption{Median of metrics}
+        \label{fig:medianMetrics}
+    \end{figure}
+    \textbf{Are there any metrics we forgot?}
+    \begin{itemize}
+        \item "After all, it is to create a metric to start running highlights when enemies are close to each other. Like in smokes or distance wise. Because if you are very close to each other on a site or something, highlights are rarely created there." {limpan}
+        \item "Well, hit percentage of the amount of bullets fired, right? I'm thinking, well, more or less. Oh, one second. Yeah, no, that's about it. The hit ratios are important to me. And maybe crosshair placement." {benjamin}
+        \item "Kind of like Olofboost there." {zpam}
+        \item "Something you didn't mention was this movement thing." {Aiimar}
+        \item "Real movement players." {otto}
     \end{itemize}
-Interesting takes from the average is that the team side has very low impact on a highlight.\\\\
-\subsection{Sixth question}
-Question six was, "is there any metric that we have forgotten?". On this question, one interviewee answered, "Something you didn't mention was this movement thing." which we did not include in the metrics but could be worth thinking about when developing the algorithm. One problem with accounting for movement is that it is hard to do, and what should be considered when looking at movement. Such, if a player moves fast between kills or if a player b-hops cross the map and eliminates an enemy. Another interviewee said, "The hit ratios are important to me. And maybe crosshair placement." Shots fired could be swapped out to hit ratio because as there could be situation where more bullets are necessary such as shooting through walls or where there is damage fall-off based on distance. Crosshair placement is also hard to weigh because of the implementation technicality, but it could be implemented. One interviewee said, "After all, it is to create a metric to start running highlights when enemies are close to each other. Type in smokes or distance wise. Because if you are very close to each other on a site or something, highlights are rarely created there. That they passed each other, were close to each other or that they did not see each other. Something along those lines.". To measure times when allies and enemies are in proximity to each other in a smoke or similar will also be hard to implement because of the technicality of the metric, but it could also be done. \\\\
-\subsection{Seventh question}
-Question seven "Do you use any tool to create highlights?" most interviewees answered that they had either used tools such as Medal, Faceit's highlight clipper, Esportal's highlight clipper. One interviewee answered, "I don't use anything. If I were to do it, I would use something that was simple and fast. Which fixed nice highlights. Which I could save and display. So, share those that might be able to be sent on discord directly. Or similar. like GIFS". So simplicity and portability would be important.\\\\
-\subsection{Eight question}
-The follow-up to the question above was "What do you do with the highlights?". Where some interviewees answered that they put them on YouTube in compilations with other clips, and some share them with friends. So highlights is mostly used to recap good moments and to be able to share them with friends and others.
-\\\\
-\subsection{Conclusion from interviews}
-Based on the answers we got from the questions, we now have a baseline of what we should value the different metrics. We also got new thoughts on what people look for in highlights and got examples of highlights that the interviewees liked. During the interviews we also noticed a stark difference in the specificity of answers with the people who had more experience with Counter Strike than those without. 
+\paragraph{Do you use any tool to create highlights?}
+\begin{itemize}
+    \item "I don't use anything. If I were to do it, I would use something that was simple and fast. Which fixed nice highlights. Which I could save and display. So, share those that might be able to be sent on discord directly. Or similar. Like GIFS." {limpan}
+    \item  "Yeah, FaceIt, like the FaceIt one." {benjamin}
+    \item "And I use medal just to do it manually."{benjamin}
+    \item "No, no more than the automatic that comes, for example, on e-sportal or results or something like that." {zpam}
+    \item "And then there's also GeForce Experience as well." {zpam}
+    \item "I used Medal around a year and a half ago. Then there was a lot of recording" {aiimar}
+    \item "Leetify" {otto} 
+    \item "Yeah, Gif your game. Gif your game, but that's all." {sven}
+    
+\end{itemize}
+
+\section{How do the perception of what makes a good highlight differ between novice and experienced players}
+
 

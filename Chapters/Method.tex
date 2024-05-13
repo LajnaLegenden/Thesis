@@ -6,7 +6,7 @@ Here you specify and motivate your research questions or hypotheses and relate t
 
 
 \section{Defining research questions}
-\textbf{Our text:}\\
+
 \section{Preliminary goals:}
 \normalsize
 \begin{enumerate}[label=PG\arabic*., leftmargin=*]
@@ -30,25 +30,40 @@ Research question number 1 is connected to goal 1. Question 2 is connected to go
 The value of these goals can affect and be used by players of the Counter Strike 2, others that are interested in the topic of highlight making/analyzing, and for spectators of the game.\\\\
 
 \section{Describing your research method}
-\textbf{our text:}\\
-We use a proof of concept and mixed-methods approach with surveys and interviews in this study. The interviews are conducted to get a better insight into what and how to measure different metrics that will be used in the algorithm. The surveys serve the purpose of comparing our algorithm with existing highlight tools. This way we can see if our algorithm could be considered better at finding highlights.
+We use a proof of concept and mixed-methods approach with surveys and interviews in this study. The interviews are conducted to get a better insight into what and how to weigh different metrics that will be used in the algorithm. The surveys serve the purpose of comparing our algorithm with existing highlight tools. This way we can see if our algorithm could be considered better at finding highlights.
 \subsection{Proof of concept of an algorithm}
 
-\subsubsection{Initial plan}6
+\subsubsection{Initial plan}
 The initial plan was to have a system in which the \Gls{Demofile} is analyzed and all the results of the different metrics are multiplied by a weight and then added to a final score. Some of the metrics are ones that you want to be lower, like the time between each kill, and if you die. The formula would look something like this.
 
 $$\text{Total Score} = \sum_{i=0}^{x} weight_i \times metric_i $$
 
 where x is the number of metrics
+
+\subsubsection{Implementation}
+
+Implementing the analyzer step was a lot of code to write, but not much advanced code. Mostly it was reading some value for each player every round, and storing those values in a Metrics class. This class held all information about a players metric for a given round, and contained some helper methods to set the metrics in a cleaner way.
+
+One of the metrics that was hard to implement was the \Gls{jumpshot}s. Until very recently (2024-04-24), there was no built in way of checking if a player was in the air or not, but right in time, Valve, the developer of Counter strike 2, added a new feature\cite{onTheOtherHandReleaseNotes} to show if a player is in the air during a kill.
+
+Before this, our solution was to check the Y position of the player over a two second windows, one second before until one second after. After this, we checked the position of the player and made sure that the players velocity was an arch, starting going high, and then curving back down. This solution has issues, a ladder or stairs could fool this solution, so the newer update was very helpful.
+
 \subsubsection{Final Product}
+
+The final product contains a web interface, that made it easier for us to use and look at the metrics and whats going on. This was helpful for debugging issues with the analyzer, as well to see why a round got the score it did. The full process is that you upload the demo file you want to analyze onto the site, this gets passed to a DemoAnalyzer instance, that extracts the demo information. This then loads up a page where we can see all the metrics, for all the players, in all rounds. The round score for each round is automatically calculated, and the best round score of the match gets displayed on the site, along with the metrics for that round. This is how we determined what clips were supposed to be used for the survey. The web page could be adapted for user consumption, by just hiding the details of the round.
 
 \paragraph{Linear Metrics}
 For all linear metrics that we have, we map the input to somewhere between 0 - 100. This was we handle cases where two metrics are of the same importance, but the value they give are orders of magnitude off each other. An example would be damage, and kills (genom) smokes. You can only get a maximum of 5 kills trough smokes, but you can get up to 500 damage. This was if i get 2 smoke kills and 200 damage, both will output 40. We used a linear mapping function for this. The function is explained below
 
 The metrics that use this method of scoring is:
 \begin{itemize}
-    \item Smoke kills
-    \item add moe \todo{add more}
+    \item Damage dealt
+    \item Head shots
+    \item No-Scopes
+    \item How long between each kill
+    \item \Gls{jumpshot}s
+    \item Hit ratio
+    \item Distance
 \end{itemize}
 
 \begin{align*}
@@ -66,24 +81,17 @@ The metrics that use this method of scoring is:
 & \quad \quad P:  \text{represents the constant POINTS\_PER\_METRIC = 100}
 \end{align*}
 
-This function is the same used by a popular library p5js \cite{p5jsMap}, that is used for interactive graphics among other things. We made a shothand to write cleaner code, using the function mapToScore, that calls the map function, but with the target min and max values already set to 0 and POINTS\_PER\_METRIC, that in out case is 100
+This function is the same used by a popular library p5js \cite{p5jsMap}, that is used for interactive graphics among other things. We made a shorthand to write cleaner code, using the function mapToScore, that calls the map function, but with the target min and max values already set to 0 and POINTS\_PER\_METRIC, that in out case is 100
 
 
 \paragraph{Exponential metric}
-For some metrics, we choose to make a greater difference between the lower numbers and the higher ones. We did this by raising the input to the power of 2 before using the mapToScore function. This was we get a bigger difference between 4 and 5, compared to 2,3. The metrics we did this for is:
-\begin{itemize}
-    \item Kills
-    \item add more \todo{add more}
-\end{itemize}
-
-
+For some metrics, we choose to make a greater difference between the lower numbers and the higher ones. We did this by raising the input to the power of 2 before using the mapToScore function. This was we get a bigger difference between 4 and 5, compared to 2,3. This we only did for kills.
 
 \paragraph{Other metrics}
-
-Some metrics did not work well with this system, since they either are not numbers, or needed other processing on them to make them work well inside the algorithm. This section will explain how they work, and why they did not work with the linear or exponential functions.
+Some metrics did not work well with this system, since they either are not numbers, or needed other processing on them to make them work well inside the algorithm. This section will explain how they work, and why they did not work with the linear or exponential functions. Some of them just mapped to either the maximum amount of points, like if you died, or what side you were on.
 \paragraph{HP left}
 
-This uses a exponential decay function. This is becasue the lower the health of the player, the more stress it puts on the player. \todo{reference to interviews, and write more about why we choose 35}. We picked 35 as the point where we should start increasing the points significantly. We can now input the \acrshort{hp} of the player into the formula and we get a value between 5 and 100.            
+This uses a exponential decay function. This is because the lower the health of the player, the more stress it puts on the player. \todo{reference to interviews, and write more about why we choose 35}. We picked 35 as the point where we should start increasing the points significantly. We can now input the \acrshort{hp} of the player into the formula and we get a value between 5 and 100.            
 $$x) = 100 \cdot e^{-ax}  \qquad \text{where } a = 0.03$$
 This is then mapped using the function mapToScore from before to a number between 0 and 100. After the normalizing we multiply this by the weight for the metric. 
 \todo{explain how the function works and how we came p with it}
@@ -217,8 +225,6 @@ Question one to three in the pre interview will help us achieve the three prelim
 The choice of doing interviews was so that we could get a better understanding on how to rate different metrics and what players think is a good highlight so that we could improve our algorithm. The interview would be conducted either in person or online, where it would be recorded or transcribed. The targeted respondents would be people who analyze the game, such as casters, commentators or professionals players of the game. We would also interview more casual players of the game. To recruit these respondents, we would have to email or contact them through other forms and ask if they are interested in participating in our interview. After the interviews are conducted, we gather all the data we have collected and analyze it. Things to look for would be patterns and themes that are recurring in the answers.\\\\
 The answers we gathered here lays a base on how we weigh our metrics but could be used in other games that are similar to Counter Strike 2.\\\\ 
 
-
 \section{Validity and reliability of your approach}
-\textbf{Our text:}\\
-Our approaches of collecting data through interviews was done via discord where we recorded the interview. This was done so that we could have a greater reach of who we interviewed. This made it possible to get a bigger size pool of different people. We also had to take into account that the people we wanted to interview had played Counter Strike or similar games.\\\\ We recognized that it would be hard to fairly value metrics, as there a many, but the approach we took made it so that if there are metrics not mentioned by us in the interview the interviewee could have the possibility to add metrics.   \\\\\
+Our approaches of collecting data through interviews was done via discord where we recorded the interview. This was done so that we could have a greater reach of who we interviewed. This made it possible to get a bigger size pool of different people. We also had to take into account that the people we wanted to interview had played Counter Strike or similar games.\\\\ We recognized that it would be hard to fairly value metrics, as there a many, but the approach we took made it so that if there are metrics not mentioned by us in the interview the interviewee could have the possibility to add metrics.\\\\
 Our approaches of collecting data through surveys was done via Google forms to compare our algorithm with the existing highlight tool ALLSTAR. The participants would not know which clip came from ALLSTAR or our algorithm. As the clips created are from the same matches and the same persons when comparing this makes it as un-biased as possible. The games where from our own games history from the dates {INSERT DATE} to {INSERT DATE}. In case our algorithm and Allstar outputted the same round a new match was picked and the instance noted down. 
