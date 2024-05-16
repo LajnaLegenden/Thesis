@@ -78,7 +78,9 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{pgf-pie}  
-
+\usepackage{colortbl}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
 \usepackage{textcomp}
 \usepackage{longtable}
 \usepackage{multirow}
@@ -100,7 +102,7 @@
 
 %\usepackage[sort&compress,numbers,square,comma]{natbib} % natbib interferes with the style; use \cite instead (see below)
 \usepackage{cite} % works only with numeric citations; comment out when using author-year styles
-\usepackage[color=blue!10,textsize=footnotesize,textwidth=25mm]{todonotes}
+\usepackage[color=blue!10,textsize=footnotesize,textwidth=200mm,disable]{todonotes}
 \DeclareGraphicsExtensions{.pdf}
 
 \newtheorem{lem}{\textsc{Lemma}}[chapter]
@@ -219,23 +221,20 @@ SE--371 79 Karlskrona, Sweden    & Fax      & : & +46 455 38 50 57 \\
 % -------------------
 \abstract
 
-Highlights are often the things people remember from sport events, and are memorable even years after the event has taken place. In the world of e-sport, games such Counter Strike 2 the statement also stands true. We present a new algorithm for creating highlights that takes into account many different metrics to calculate the better moments of a game of Counter Strike 2.
+Highlights are often the things people remember from sporting events and are memorable even years after the event has taken place. In the world of e-sport, games such as Counter-Strike 2 the statement also stands true. In this study, we use a proof of concept and mixed-methods approach with surveys and interviews to compare our algorithm with an existing highlight tool, and present a new algorithm for creating highlights that take into account many different metrics to calculate the better moments of a game of Counter-Strike 2. We will also look into metrics, how important they are, how players with different knowledge of the game rate them, and how an algorithm can be created to find highlights in Counter-Strike 2. The findings that we uncovered were an alternative algorithm with a slight edge of preference over the existing highlight tool and an unanswered question about preference when it comes to highlights between novice and experienced players.  
 \\\\
 
 
+
 \noindent
-\textbf{Background.} ... \newline
-\textbf{Objectives.} ... \newline
-\textbf{Methods.} ... \newline
-\textbf{Results.} ... \newline
-\textbf{Conclusions.} ...
+
 
 \vspace{1cm}
 % You can list up to 5 keywords, at most 2 appearing in the title;
 % starts 1 line below the abstract.
 \noindent
 \textbf{Keywords:}
-Counter Strike, Highlight, Algorithm, 
+Counter-Strike, Highlight, Algorithm
 \cleardoublepage
 % -------------------
 
@@ -246,7 +245,9 @@ Counter Strike, Highlight, Algorithm,
 % -------------------
 \acknowledgments % Optional, comment out this part if not needed
 \noindent
-Here you can add your acknowledgements.
+We would like to thank our supervisor \super \space for great support and motivation all through this project
+\\\\
+We would also like to thank the developer of the parsing library we used, LaihoE, for quick responses to any questions or issues that came up with the parsing of Demo files
 
 \cleardoublepage
 % -------------------
@@ -284,6 +285,66 @@ Here you can add your acknowledgements.
 
 \appendix
 \chapter{Supplemental Information}
+\chapter{Highlights}
+\begin{table}[]
+\begin{tabular}{|l|l|l|}
+\hline
+ & Video A & Video B \\ 
+\hline
+Match 1 & \url{https://youtu.be/zmpZS9_SW-c} & \url{https://youtu.be/LUA0e6gtYg0} \\ 
+\hline
+Match 2 & \url{https://youtu.be/yvH2JjY5rIk} & \url{https://youtu.be/u9V1NFJhSeM} \\
+\hline
+Match 3 & \url{https://youtu.be/U39TTOzABAU} & \url{https://youtu.be/t39tntUUexc} \\
+\hline
+Match 4 & \url{https://youtu.be/ENDgZIIAuvA} & \url{https://youtu.be/1ddl6gxCe0o} \\
+\hline
+Match 5 & \url{https://youtu.be/ZizA7FQoPo0} & \url{https://youtu.be/Ji-iPLwFqWg} \\
+\hline
+Match 6 & \url{https://youtu.be/TtVvfJuzz-E} & \url{https://youtu.be/wAGsiR5alYk} \\
+\hline
+Match 7 & \url{https://youtu.be/6ZU_P21xE4c} & \url{https://youtu.be/QOiW2eAv-00} \\
+\hline
+Match 8 & \url{https://youtu.be/BjAwMkbuS6U} & \url{https://youtu.be/Xls3RdYjtKk} \\
+\hline
+Match 9 & \url{https://youtu.be/UStwxeWtSug} & \url{https://youtu.be/HEwJZEkGQ1Q} \\
+\hline
+\end{tabular}
+\end{table}
+\chapter{Questions from interviews:}
+\normalsize
+\begin{itemize}
+    \item What is the most memorable highlight in Counter-Strike history according to you? 
+    \begin{itemize}
+        \item What makes it memorable?
+    \end{itemize}
+    \item What is your experience with highlights in FPS games?
+    \item What makes a good highlight?
+    \item What metrics are important for a highlight?
+    \item Rate these metrics from 1 to 10:
+        \begin{itemize}
+        \item Amount of kills 
+        \item if the player died
+        \item Weapon used 
+        \item Time between each kill
+        \item Bullets fired
+        \item Team side
+        \item Player position (Distance)
+        \item Airborne 
+        \item Headshot
+        \item Damage given
+        \item HP of the player
+        \item No scope with scoped weapons
+        \item Wall banging
+    \end{itemize}
+    \item Do you use any highlight tool?
+    \begin{itemize}
+        \item What highlight tool?
+        \item What do you do with the highlights?
+    \end{itemize}
+
+    
+\end{itemize}
 
 
 % DO NOT CHANGE BELOW

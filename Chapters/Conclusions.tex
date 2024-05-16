@@ -1,24 +1,21 @@
 \chapter{Conclusions and Future Work}
 \label{chp:conclusions}
-\section{On the content}
 
-
-\section{Placing your thesis in perspective}
-\subsection{An alternative perspective}
-
-
-\subsection{Alternative research questions}
+\section{Alternative research questions}
 \textbf{The Potential for Cross-Game Highlight Generation:} This thesis is focused on Counter-Strike 2, the underlying principles of highlight generation could be used in other competitive games. Research could explore the process of developing an algorithm that works in any game, identifying common metrics and gameplay elements that contribute to highlight quality across different games.\\\\
-\textbf{The Role of Emotion and Narrative in Highlights:} Interview responses showed the how important the story of a highlight is, in shaping the highlights memorability. Further research could investigate how some emotions (e.g., excitement, surprise, tension) and narrative structures like underdog victories and unexpected plays contribute to  a highlights enjoyment. This could lead to algorithms that prioritize highlights with strong emotional and narrative appeal.
-\subsection{Describe any unanswered aspects of your project.}
-Skill gap?
-\subsection{Potential future work}
-There is a few potentials for future work. One can be to train a machine learning algorithm to find highlights, based of existing highlights. You can take similar data that we use, but feed that into a neural network and make that output the best round. There is a a lot of data available for this, however a lot of prepossessing on the data would be required.
+\textbf{The Role of Emotion and Narrative in Highlights:} Interview responses showed how important the story of a highlight is, in shaping the highlight's memorability. Further research could investigate how some emotions (e.g., excitement, surprise, tension) and narrative structures like underdog victories and unexpected plays contribute to a highlight's enjoyment. This could lead to algorithms that prioritize highlights with strong emotional and narrative appeal.
+\section{Unanswered aspects}
+Goal 3 was not reached, as the sample pool and the patterns found for those with little to no experience with Counter-Strike 2 were not sufficient to reach any conclusions.
+\section{Potential future work}
+There are a few potentials for future work. One could be to train a machine learning algorithm to find highlights, based on existing highlights. Data could be taken that is similar to the data we used, but feed that into a neural network and make that output the best round. There is a lot of data available for this, however a lot of prepossessing on the data would be required.
 
-More metrics could also be looked at, like positioning on different parts of the map, cross hair placement, counter strafing, spray control and spray transfers. Implementing all of these metrics would take a lot of game knowledge, math, and development time to implement.
+More metrics could also be looked at, like positioning on different parts of the map, cross-hair placement, counter strafing, spray control, and spray transfers. Implementing all of these metrics would take a lot of game knowledge, math, and development time to implement.
 
-A final work that could be done would be to change the metrics based on the player. An example would be to have a higher weight on kills, if the player is lower rank, and more focus on mechanics if the player is of a higher skill level. This can be inferred from things like your rating in the game or how many hours you have played the game for.
+A final work that could be done would be to change the metrics based on the player. An example would be to have a higher weight on kills if the player is of a lower rank, and more focus on mechanics if the player is of a higher skill level. This can be inferred from things like the rating of a player in the game or how many hours the player has played the game.
 \section{Conclusion}
-If we now take a look back at the highlight from Coldzera at MLG Columbus 2016, and see how that can work with our algorithm? 
+We found a way to create an algorithm that finds preferred highlights to existing highlight tool Allstar according to our survey. The importance of different metrics was researched in the interviews that later were used in the algorithms weight system. The perception of what makes a good highlight between novice and experienced players was researched, but could not be concluded due to the lack of patterns found and data in the survey.
+\\\\
+If we now take a look back at the highlight from Coldzera at MLG Columbus 2016 and see how that can work with our algorithm:
+\\\\
+He gets the first kill with a scoped AWP shot, at 29 seconds left. Three seconds later, he gets two no-scope kills while in the air. All of these are things that our algorithm will find and use. One of them was even through another player. Another three seconds later, he gets his fourth kill, again with a no-scope AWP shot. That is four kills over 6 seconds, awarding loads of points as far as the algorithm is concerned. This makes his average time between each kill go all the way down to $6/4=1.5$ seconds between each kill. Adding in the jumping shots, that most of them were no scopes, and that he is using the AWP, makes us understand why this highlight is as legendary as it is.
 
-He get the first kill with a scoped AWP shot, at 29 seconds left. Three seconds later he get two no scope kills while in the air. All of this is things that the algorithm will find and use. One of them was even trough another player. Another three seconds later he gets his fourth kill, again with a no scope AWP shot. That is four kills over 6 seconds, awarding loads of points as far as the algorithm is concerned. This makes his average time between each kill go all the way down to $6/4=1.5$ seconds between each kill. Adding in the jumping shots, that most of them were no scopes, and that he is using the AWP, makes us understand why this highlight is as legendary as it is.

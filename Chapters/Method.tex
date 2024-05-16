@@ -9,55 +9,53 @@
     \item What metrics are most important when developing an algorithm to find highlights in Counter-Strike 2? \\\\
     Finding out what is required for a highlight and what players prefer can help in further research into the subject and can even connect to other games where similar highlights can be of interest.
     \item How do the perceptions of what makes a good highlight differ between novice and experienced players?\\\\
-    Finding out the difference between perception of highlights of a seasoned player or someone who has not as much or no experience gives us a insight how you can direct highlights so that they can be enjoyed by different demographics. 
+    Finding out the difference between the perception of highlights of a seasoned player or someone who has not as much, or no experience gives us an insight of how one could direct highlights so that they can be enjoyed by different demographics. 
 \end{enumerate}
 \section{Goals:}
 \normalsize
-\begin{enumerate}[label=PG\arabic*., leftmargin=*]
-    \item Create a proof of concept of a highlight algorithm, that finds "better" highlights for a given player in a match
+\begin{enumerate}[label=G\arabic*., leftmargin=*]
+    \item Create a proof of concept of a highlight algorithm, that finds "better" highlights for a given player in a match in Counter-Strike 2.
     \item Find out what is required for an alternative highlight algorithm, what metrics players prefer
-    \item Find what makes a highlight "better" and increases enjoyment when watching a highlight.
+    \item Find what makes a highlight "better" and increases enjoyment when watching a highlight for players of different familiarity of Counter-Strike 2.
 
 \end{enumerate}
 Research question number 1 is connected to goal 1. Question 2 is connected to goal 2. Question 3 is connected to goal 3.\\\\
-The value of these goals can affect and be used by players of the Counter Strike 2, others that are interested in the topic of highlight making/analyzing, and for spectators of the game.\\\\
+The value of these goals can affect and be used by players of Counter-Strike 2, others who are interested in the topic of highlight making/analyzing, and for spectators of the game.\\\\
 
-\section{Describing your research method}
-We use a proof of concept and mixed-methods approach with surveys and interviews in this study. The interviews are conducted to get a better insight into what and how to weigh different metrics that will be used in the algorithm. The surveys serve the purpose of comparing our algorithm with existing highlight tools. This way we can see if our algorithm could be considered better at finding highlights.
+\section{Research method}
+We use a proof of concept and mixed-methods approach with surveys and interviews in this study. The interviews are conducted to get a better insight into what and how to weigh different metrics that will be used in the algorithm. The surveys serve the purpose of comparing our algorithm with Allstar's "play of the game". This way we can see if our algorithm could be considered better at finding highlights.
 \subsection{Proof of concept of an algorithm}
-\subsubsection{Initial plan}
-\todo{remove 4th level headings}
-The initial plan was to have a system in which the \gls{Demofile} is analyzed and all the results of the different metrics are multiplied by a weight and then added to a final score. Some of the metrics are ones that are better when they are lower, like the time between each kill, and if you die. The formula would look something like this.
+\paragraph{Implementation}
+\mbox{}\\
 
-$$\text{Total Score} = \sum_{i=0}^{x} weight_i \times metric_i $$
+The analyzer step involved many lines of code, but most of it wasn't complex. It primarily consisted of reading player values each round and storing them in a Metrics class. This class contained all round-specific player metrics and included helper methods for easier data entry.
 
-where x is the number of metrics
+One challenging metric to implement was \gls{jumpshot}s. Prior to April 24, 2024, there was no way to directly determine if a player was airborne during a kill. However, Valve, the developer of Counter Strike 2, released an update that included this feature\cite{onTheOtherHandReleaseNotes}.
 
-\subsubsection{Implementation}
+Previously, we had developed a workaround that analyzed the player's Y position over a two-second window surrounding a kill. We checked if the player's trajectory resembled an arch, starting high and then curving downward. This method was not perfect, as it could be fooled by ladders or stairs. Therefore, the new update greatly improved our accuracy.
+\paragraph{Final Product}\mbox{}\\
+The final product includes a web interface, simplifying the process of reviewing and analyzing metrics. This proved valuable for debugging analyzer issues and understanding how round scores were calculated. The process starts with uploading a demo file, which is then processed by a DemoAnalyzer instance to extract relevant data. This information is then displayed on a web page, showing all metrics for each player in every round. The round score for each round is automatically calculated, and the best round score, along with its metrics, is displayed. This is how we selected clips for the survey.
 
-Implementing the analyzer step was a lot of code to write, but not much advanced code. Mostly it was reading some value for each player every round, and storing those values in a Metrics class. This class held all information about a players metric for a given round, and contained some helper methods to set the metrics in a cleaner way.
+\paragraph{Weights}\mbox{}\\
+When deciding how to use the metrics that we had the interviewees rate, we looked into ways to handle likert scale data and found a journal \cite{AltunaySerpil} by Serpil Aktas Altunay, Ayfer Ezgi Yilmaz (2023). In the journal we can read about the use of median, "The neutral means is the median or mid-point and the median is the 50\% sample distribution and it means 50\% of the participants have neutral to agree with opinions in a 5-point Likert scale. If the median is 4, it means 50\% of
+participants have a positive opinion.". Based on this, we decided to use the median of each metric to prioritize them and use the weights in our algorithm.
 
-One of the metrics that was hard to implement was the \gls{jumpshot}s. Until very recently (2024-04-24), there was no built in way of checking if a player was in the air or not, but right in time, Valve, the developer of Counter strike 2, added a new feature\cite{onTheOtherHandReleaseNotes} to show if a player is in the air during a kill.
+\paragraph{Linear Metrics}\mbox{}\\
+For all linear metrics that we have, we map the input to somewhere between 0–100. This way we handle cases where two metrics are of the same importance, but the value they give are orders of magnitude off each other. An example would be damage and kills through smokes. A player in a normal competitive match can only get a maximum of 5 kills through \gls{smokes}, but could get up to 500 damage. So if a player gets 2 smoke kills and 200 damage, both will output 40. We used a linear mapping function for this. The function is explained below \todo{make sure weights}
 
-Before this, our solution was to check the Y position of the player over a two second windows, one second before until one second after. After this, we checked the position of the player and made sure that the players velocity was an arch, starting going high, and then curving back down. This solution has issues, a ladder or stairs could fool this solution, so the newer update was very helpful.
-
-\subsubsection{Final Product}
-
-The final product contains a web interface, that made it easier for us to use and look at the metrics and whats going on. This was helpful for debugging issues with the analyzer, as well to see why a round got the score it did. The full process is that you upload the demo file you want to analyze onto the site, this gets passed to a DemoAnalyzer instance, that extracts the demo information. This then loads up a page where we can see all the metrics, for all the players, in all rounds. The round score for each round is automatically calculated, and the best round score of the match gets displayed on the site, along with the metrics for that round. This is how we determined what clips were supposed to be used for the survey. The web page could be adapted for user consumption, by just hiding the details of the round.
-
-\paragraph{Linear Metrics}
-For all linear metrics that we have, we map the input to somewhere between 0 - 100. This was we handle cases where two metrics are of the same importance, but the value they give are orders of magnitude off each other. An example would be damage, and kills trough smokes. You can only get a maximum of 5 kills trough smokes, but you can get up to 500 damage. This was if i get 2 smoke kills and 200 damage, both will output 40. We used a linear mapping function for this. The function is explained below
-
-The metrics that use this method of scoring is:
+The metrics that use this method of scoring are, along with their minimum and maximum values used:
 \begin{itemize}
-    \item Damage dealt
-    \item Head shots
-    \item No-Scopes
-    \item How long between each kill
-    \item \Gls{jumpshot}s
-    \item Hit ratio
-    \item Distance
+    \item Damage dealt - (0-500)
+    \item Headshots - (0-5)
+    \item No-Scopes - (0-5)
+    \item How long between each kill - (0-60)
+    \item \Gls{jumpshot}s - (0-5)
+    \item Hit ratio - (0-1)
+    \item Distance - (0-3000)
 \end{itemize}
+
+The distance metric has a maximum of 3000, and that is based on the longest viable kill in Counter-Strike 2. This distance is from Pit to Goose on Dust2.
+
 
 \begin{align*}
 & \textbf{Function map:} \\
@@ -74,21 +72,24 @@ The metrics that use this method of scoring is:
 & \quad \quad P:  \text{represents the constant POINTS\_PER\_METRIC = 100}
 \end{align*}
 
-This function is the same used by a popular library p5js \cite{p5jsMap}, that is used for interactive graphics among other things. We made a shorthand to write cleaner code, using the function mapToScore, that calls the map function, but with the target min and max values already set to 0 and POINTS\_PER\_METRIC, that in out case is 100
+This function is the same used by a popular library, p5js \cite{p5jsMap}, that is used for interactive graphics among other things. We made a shorthand to write cleaner code, using the function mapToScore, which calls the map function, with the target min and max values already set to 0 and POINTS\_PER\_METRIC, which in our case is 100
 
 
-\paragraph{Exponential metric}
-For some metrics, we choose to make a greater difference between the lower numbers and the higher ones. We did this by raising the input to the power of 2 before using the mapToScore function. This was we get a bigger difference between 4 and 5, compared to 2,3. This we only did for kills.
 
-\paragraph{Other metrics}
-Some metrics did not work well with this system, since they either are not numbers, or needed other processing on them to make them work well inside the algorithm. This section will explain how they work, and why they did not work with the linear or exponential functions. Some of them just mapped to either the maximum amount of points, like if you died, or what side you were on.
-\paragraph{HP left}
+\paragraph{Other metrics}\mbox{}\\
+Certain metrics were incompatible with our scoring system, as they were not numbers or required additional processing. This section details those metrics, explaining why they did not fit with linear or exponential functions. Some metrics, such as death or what side the player was on, were simply assigned maximum points before the weighing process.
 
-This uses a exponential decay function. This is because the lower the health of the player, the more stress it puts on the player. \todo{reference to interviews, and write more about why we choose 35}. We picked 35 as the point where we should start increasing the points significantly. We can now input the \acrshort{hp} of the player into the formula and we get a value between 5 and 100.            
+
+\paragraph{Kills}\mbox{}\\
+For certain metrics, we increased the differences between lower and higher values. We achieved this by squaring the input before applying the mapToScore function. This resulted in a greater distinction between 4 and 5, compared to 2 and 3. This adjustment was applied only to kills, with a minimum value of 0 and a maximum value of 5.
+
+
+\paragraph{HP left}\mbox{}\\
+
+This uses an exponential decay function. This is because the lower the health of the player, the more stress it puts on the player. We picked 35 as the point where we should start increasing the points significantly. This is because an unarmored enemy does between 35-37 damage with a primary rifle. During the interviews, interviewees mentioned that being within one bullet of death, makes the highlight more impressive. We can now input the \acrshort{hp} of the player into the formula, and we get a value between 5 and 100.            
 $$x) = 100 \cdot e^{-ax}  \qquad \text{where } a = 0.03$$
-This is then mapped using the function mapToScore from before to a number between 0 and 100. After the normalizing we multiply this by the weight for the metric. 
-\todo{explain how the function works and how we came p with it}
-This formula is an exponential decay function. It models the decrease in \acrshort{hp} Left Value as the input value (x) increases. The growth rate (a) controls how quickly the value decays. A higher growth rate means a faster decay. 
+This is then mapped using the function mapToScore from before to a number between 0 and 100. After normalizing, we multiply this by the weight for the metric. 
+This formula is an exponential decay function. It models the decrease in \acrshort{hp} Left Value as the input value (x) increases. The growth rate (a) controls how quickly the value decays. A higher growth rate means a faster decay. We used this to make sure that one bullet from death increases the value. If the player is even lower, more and more weapons will kill the player with one bullet. According to the interviews conducted, this increases the stress, and therefore how impressive the highlight is.
 
 We choose 0.03 as the $a$ value since this makes the points for that metric go up around the 35 \acrshort{hp} mark, that being one shot away from death from most strong weapons.
 
@@ -99,7 +100,7 @@ We choose 0.03 as the $a$ value since this makes the points for that metric go u
 \begin{axis}[
     axis lines = left,
     xlabel = $HP$,
-    ylabel = {$f(x)$},
+    ylabel = {$f(x), points$},
 ]
 \addplot [
     domain=0:100, 
@@ -122,41 +123,49 @@ coordinates {
 \end{figure}
 
 \paragraph{Weapon score}
-For the weapons, we decided to score each weapon individually, this was each weapon gets a part of the max score for the metric. This is done by first dividing the total score for the metric, so for four weapons that will be 25 points. Then it used that value as the max points for the weapon, and rates it with the difficulty rating from the game, taken from the ingame buy menu. For an ak47, which has a difficulty rating of 4, the formula is as follows: $$ score = map(weaponDifficulty, 0, MWW, 0, PPW) $$ Here MWW is max weapon weight, and PPW is points per weapon.
+For the weapons, we decided to score each weapon individually, this was each weapon gets a part of the max score for the metric. This is done by first dividing the total score for the metric, so for four weapons that will be 25 points. Then it uses that value as the max points for the weapon and rates it with the difficulty rating from the game, taken from the in-game buy menu. For an AK47, which has a difficulty rating of 4, the formula is as follows: $$ score = map(weaponDifficulty, 0, MWW, 0, PPW) $$ Here MWW is max weapon weight, and PPW is points per weapon.
 
-This is done for each one of the weapons added together and finally multiplied with the weight for guns.
+This is done for each one of the weapons, added together, and finally multiplied with the weight of the weapons.
 
 
 \paragraph{Side}
 When looking at what side the player is playing on, either \acrshort{t} or \acrshort{ct}, we looked at the win rate for each side for the last 6 months\cite{hltvMapStats}. Here we saw a quite even split, but based on the map in the current competitive map pool, \acrshort{ct} has a higher win rate on the majority of the maps. Therefore, we assign \acrshort{t} and \acrshort{ct} -1 and 1, then in the weights, it has a negative value, so that the -1 for \acrshort{t} get awarded more points than \acrshort{ct}.
 
 
-\subsubsection{Technologies used}
-Our algorithm was built using Typescript as the language of choice. This choice was made both out of familiarity and based on Typescripts fast iteration speed, enabling us to make changes faster than a language like C++ or Rust.
+\paragraph{Technologies used}\mbox{}\\
+Our algorithm was built using Typescript as the language of choice. This choice was made both out of familiarity and based on Typescript's fast iteration speed, enabling us to make changes faster than a language like C++ or Rust.
 
-Counter-strike 2 records everything that happens in a match in a \Gls{demo} file. To parse this information, we used a library\cite{demoparser} that would give us events from the match, such as whenever a player dies, shoots, or when the rounds start or end. This library does not give us the data we need directly, so for that we need to parse information from the events available. So for that we need to analyze the data from the demo, to later pass to our algorithm to calculate with \todo{EXPLAIN MORE????}
-\subsubsection{How it works}
-The first part of the process to generate a highlight is to extract the metrics from the demo file. This is done in a file called DemoAnalyzer.ts, and this file handles reading the \Gls{demo} file and transforming the data into a usable format. It does this by looking at different events \todo{list events??} and calculate the metrics. \todo{explain how some of them work?}
+Counter-Strike 2 records everything that happens in a match in a \gls{demofile}. To parse this information, we used a library\cite{demoparser} that would give us events from the match, such as whenever a player dies, shoots, or when the rounds start or end. This library does not give us the data we need directly, so for that we need to parse information from the events available. So for that, we need to analyze the data from the demo, to later pass to our algorithm.
+\paragraph{How it works}\mbox{}\\
+The first part of the process to generate a highlight is to extract the metrics from the demo file. This is done in a file called DemoAnalyzer.ts, and this file handles reading the \gls{demofile} and transforming the data into a usable format. It does this by looking at different events and calculating the metrics.\\\\
+The events from the demo that we use are:
 
-The next part is to store the metrics in the database. This is handled by a separate file `SaveDemoInfo.ts`. This file reads the data, and puts it into tables in the database. The reason for making this a separate step was for readability and code quality. This splits up the code into the analyzer, that is only responsible for reading the data, and storing it in memory, and the SaveDemoInfo part, that only focuses on storing the data. 
+\begin{itemize}
+    \item player\_death
+    \item player\_hurt
+    \item round\_end
+\end{itemize}
+The next part is to store the metrics in the database. This is handled by a separate file `SaveDemoInfo.ts`. This file reads the data and puts it into tables in the database. The reason for making this a separate step was for readability and code quality. This splits up the code into the analyzer, which is only responsible for reading the data, and storing it in memory, and the SaveDemoInfo part, which only focuses on storing the data. 
 
-The last part is the most important step. This is the algorithm itself. This takes in all the data from the demo file, as well as the weights we have defined from the interviews \ref{sec:interviews}. This then calculates a score from each metric between 0 and 100. This was done to make sure that each metric is valued the same before the weighing process. This is done using this mapping function from p5.js\cite{p5jsMap}\todo{check ref with henry}
+The last part is the most important step. This is the algorithm itself. This takes in all the data from the demo file, as well as the weights we have defined from the interviews \ref{sec:interviews}. This then calculates a score from each metric between 0 and 100. This was done to make sure that each metric was valued the same before the weighing process. This is done using this mapping function from p5.js\cite{p5jsMap}
 
-After the mapping function has given its value between 0 and 100, this then is weighted, so that we can control how important the metrics are for a highlight. For example, should one kill through a wall be considered better or worse than one kill that is very far away? That is the proposal of a weight. \todo{better example?}
+
+Following the mapping function's assignment of a value between 0 and 100, this value is then weighted to control the relative importance of each metric in determining highlight quality. For instance, is a kill through a wall more or less impressive than a kill from a long distance? Weights allow us to adjust the impact of each metric in making this determination.
 
 \subsection{Survey}
 \label{sec:survey}
-A survey was created with our algorithm's outputted round and the Allstar\todo{add glossarie} tool's "play of the game" round, where the same matches are evaluated on the same player, and the participant can choose which they prefer. Both rounds will be re-recorded so that a fair comparison can be made without editing and each clip starts a few seconds before and action such as shooting, spotting an enemy or throwing utility is done.\\\\
+A survey was created with our algorithm's outputted round and the \Gls{allstar} tool's "play of the game" round, where the same matches are evaluated on the same player, and the participant can choose which they prefer. Both rounds will be re-recorded so that a fair comparison can be made without editing and each clip starts a few seconds before an action such as shooting, spotting an enemy, or throwing utility is done.\\\\
+\textbf{}
 \textbf {Content for the survey:}
 \begin{itemize}
-    \item The respondent will be prompted to answer a question about how familiar they are with the game Counter-Strike 2. This will be presented in a type of likert scale. 
+    \item The respondent will be prompted to answer a question about how familiar they are with the game Counter-Strike 2. This will be presented in a type of Likert scale. 
     \begin{figure}[H]
         \centering
         \includegraphics[width=4cm]{Images/likertscale.png}
         \caption{Likert scale}
         \label{fig:likerScale}
     \end{figure}
-    \item Two clips are shown, A and B. One is the round our algorithm picked and one is the round Allstar picked, the respondent will not be told which clip is which so that there will be no biases. The respondent is then faced with the question of which clip they preferred or if the clips are indifferent. They then have the choice to write a more detailed explanation why they picked as they did or any other input they had. There will be 18 clips in total, 9 comparisons.
+    \item Two clips are shown, A and B. One is the round our algorithm picked and one is the round Allstar picked, the respondent will not be told which clip is which so that there will be no biases. The respondent is then faced with the question of which clip they preferred or if the clips are indifferent. They then have the choice to write a more detailed explanation of why they picked as they did or any other input they had. There will be 18 clips in total, 9 comparisons.
     \begin{figure}[H]
         \centering
         \includegraphics[width=10cm]{Images/A-B_choices.png}
@@ -166,59 +175,24 @@ A survey was created with our algorithm's outputted round and the Allstar\todo{a
     \begin{figure}[H]
         \centering
         \includegraphics[width=10cm]{Images/Questions_AB_reason_Survey.png}
-        \caption{Video A and B example}
+        \caption{Question from survey}
         \label{fig:VideoA_B_answer_reason}
     \end{figure}
-
 \end{itemize}
-The survey will connect with preliminary goal 1 to see if our the highlight our algorithm creates are preferred over what existing tools create. It will also answer research question 3 by seeing if algorithm based highlight clips can create joy for the viewer.\\\\
-The choice to conduct surveys was made because we want to have a large pool of opinions, as we want to see if our new algorithm is "better" than existing ones. By choosing to do surveys, we can reach a greater amount of people. To create the surveys, we would use either sites like Surveymonkey.com or Google Forms. The surveys would be put in different forums on sites like Reddit.com, Discord channels and HLTV.org. The main targeted respondents would be those who have played Counter Strike 2, as these are the more likely to have an opinion about the clips they are shown. As we have no control of the surveys and who receives them, we would likely need to put questions such as "Have you played the game Counter Strike 2?" to see the difference in opinions between people who have played the game and not.\\\\
-When analyzing the results, we would need to do a statistical analysis of the quantitative data, which would be the preferred clip. We could then gather statics such as the median for which clips the users decide to pick. Creating pie charts would also be a good way to visualize how the participants picked. For the qualitative data, which would be the free text part where the participant explained why they picked what, we will have to look for patterns and trends between what they picked and categorize based on if they played the game before.
+The survey connects with goal 1 to see if the round from our algorithm presents is preferred over Allstar's "play of the game" round. It will also answer research question 3 by finding what people with less experience with Counter-Strike 2 think is important in a highlight.\\\\
+The choice to conduct surveys was made because we want to have a large pool of opinions, as we want to see if our new algorithm is "better" than Allstar's algorithm. By choosing to do surveys, we can reach a greater amount of people. To create the surveys, we used Google Forms. The surveys were put in different forums on sites like Reddit, Discord channels and sent to people through private messages. The main targeted respondents would be those who have played Counter Strike 2, as these are the more likely to have an opinion about the clips they are shown. As we have no control of the surveys and who receives them, we put a question asking "How familiar are you with CS2?" to see the difference in opinions between people with different experience of Counter-Strike 2.\\\\
+To analyze the results, we looked for the difference of what experienced and unfamiliar respondents picked to see if there are any patterns in the responses. We also analyzed if there is a clear preferred video clip from either Allstar's or our algorithm. 
+\\\\
 
 \subsection{Interviews}
 \label{sec:interviews}
 Interviews will be conducted before developing the algorithm to find what metrics players weigh higher, to give a better baseline on what the weights should be. \\ \\
-\textbf {Questions for the pre interview:}\\
-\section{Questions:}
-\normalsize
-\begin{itemize}
-    \item What is the most memorable highlight in Counter Strike history according to you? 
-    \begin{itemize}
-        \item What makes it memorable?
-    \end{itemize}
-    \item What is your experience with highlights in FPS games?
-    \item What makes a good highlight?
-    \item What metrics are important for a highlight?
-    \item Rate these metrics from 1 to 10:
-        \begin{itemize}
-        \item Amount of kills 
-        \item if the player died
-        \item Weapon used 
-        \item Time between each kill
-        \item Bullets fired
-        \item Team side
-        \item Player position (Distance)
-        \item Airborne 
-        \item Headshot
-        \item Damage given
-        \item HP of the player
-        \item No scope with scoped weapons
-        \item Wall banging
-    \end{itemize}
-    \item Do you use any highlight tool?
-    \begin{itemize}
-        \item What highlight tool?
-        \item What do you do with the highlights?
-    \end{itemize}
+\textbf {Interviews:}\\\\
+Questions one to three in the pre interview will help us achieve the three preliminary goals and answer the research questions, as these will give us further insight into what metrics are needed and how to value them. It will also help us get a better insight to what makes a good highlight. \\\\
+The choice of doing interviews was so that we could get a better understanding of how to rate different metrics and what players think is a good highlight so that we could improve our algorithm. The interviews were conducted online, where they were recorded and transcribed. The targeted respondents were people who had played Counter-Strike or similar games, with preferably different experience. To recruit these respondents, we contacted them via Discord. The respondents we interviewed were all people we knew. After the interviews were conducted, we gathered all the data we had collected and analyzed it. Things we looked for were patterns and themes that are recurring in the answers.\\\\
+The answers we gathered here lay a base on how we weigh our metrics but could be used in other games that are similar to Counter-Strike 2.\\\\
 
-    
-\end{itemize}
-
-Question one to three in the pre interview will help us achieve the three preliminary goals and answer the research questions, as these will give us further insight into what metrics are needed and how to value them. It will also help us get a better insight to what makes a good highlight. \\\\
-The choice of doing interviews was so that we could get a better understanding on how to rate different metrics and what players think is a good highlight so that we could improve our algorithm. The interview would be conducted either in person or online, where it would be recorded or transcribed. The targeted respondents would be people who analyze the game, such as casters, commentators or professionals players of the game. We would also interview more casual players of the game. To recruit these respondents, we would have to email or contact them through other forms and ask if they are interested in participating in our interview. After the interviews are conducted, we gather all the data we have collected and analyze it. Things to look for would be patterns and themes that are recurring in the answers.\\\\
-The answers we gathered here lays a base on how we weigh our metrics but could be used in other games that are similar to Counter Strike 2.\\\\ 
-
-\section{Validity and reliability of your approach}
-Our approaches of collecting data through interviews was done via discord where we recorded the interview. This was done so that we could have a greater reach of who we interviewed. This made it possible to get a bigger size pool of different people. We also had to take into account that the people we wanted to interview had played Counter Strike or similar games.\\\\ We recognized that it would be hard to fairly value metrics, as there a many, but the approach we took made it so that if there are metrics not mentioned by us in the interview the interviewee could have the possibility to add metrics.\\\\
-Our approaches of collecting data through surveys was done via Google forms to compare our algorithm with the existing highlight tool Allstar. The participants would not know which clip came from Allstar or our algorithm. As the clips created are from the same matches and the same persons when comparing, this makes it as unbiased as possible. The games were from our own games history from the dates 2024-05-09 to 
-2024-05-04. In case our algorithm and Allstar outputted the same round, a new match was picked, and the instance noted down. 
+\section{Validity and reliability}
+Our approach of collecting data through interviews was done via \gls{Discord} where we recorded the interview. This was done so that we could have a greater reach distance wise of who we could interview. This made it possible to get a bigger size pool of different people. We also had to take into account that the people we wanted to interview had played Counter-Strike or similar games.\\\\ We recognized that it would be hard to fairly value metrics, as there a many, but the approach we took made it so that if there are metrics not mentioned by us in the interview the interviewee could have the possibility to add metrics. By picking people we had meet before, there could be issues with convenience sampling with disadvantages such as making generalization harder and bias issues. Our approach of collecting data through surveys was done via Google Forms to compare our algorithm with the existing highlight tool Allstar. The participants would not know which clip came from Allstar or our algorithm. As the clips created are from the same matches and the same persons when comparing, this makes it as unbiased as possible. The games were from our own recent matches from the dates 2024-05-09 to 
+2024-05-04. In case our algorithm and Allstar outputted the same round, a new match was picked, and the instance was noted down.\\\\
+The surveys were distributed to friends via Discord and Steam. We also posted the survey on gaming forums on sites such as Reddit, Twitter and Steam Discussions. By using this approach, we have no control over who answers the surveys, but we get a wide spread of people who can answer it. Problems with this approach could be the quality of data, such as unserious answers and no identity control, meaning there could be duplicates. 
